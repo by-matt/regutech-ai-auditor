@@ -1,10 +1,13 @@
 """Streamlit UI for ReguTech-AI Auditor - Deterministic CoA and Pharmacopeia Audit.
 
 Author: Byron Calderón González (github.com/by-matt)
-Professional Accreditation: Biotechnology Engineer (UNAB) | CEO AquaBiotics Sur
+Professional Accreditation: Biotechnology Engineer (UNAB Top 25%) | CEO AquaBiotics Sur
 Operational Scope: Zero-hallucination deterministic compliance auditing for pharma & biotech.
+Design Standard: AquaBiotics Sur Corporate Brand Identity & Executive Editorial System.
 """
 
+import base64
+from pathlib import Path
 from typing import Any
 import pandas as pd
 import streamlit as st
@@ -27,263 +30,476 @@ from src.schemas.audit_models import (
 )
 
 st.set_page_config(
-    page_title="ReguTech-AI Auditor | Biotech & Pharma Compliance",
+    page_title="AquaBiotics Sur · ReguTech-AI Auditor",
     page_icon="⚖️",
     layout="wide",
     initial_sidebar_state="expanded",
 )
 
-# Custom Executive Editorial Styling (Eliminates AI Aesthetic & Injects Senior Consulting Tokens)
+
+@st.cache_data
+def get_brand_logo_b64() -> str:
+    """Loads and base64 encodes the official AquaBiotics Sur brand logo."""
+    logo_path = Path(__file__).parent / "assets" / "logo.png"
+    if logo_path.exists():
+        return base64.b64encode(logo_path.read_bytes()).decode("utf-8")
+    return ""
+
+
+# AquaBiotics Sur Official Corporate Design System (Anti-AI Human Craft)
 st.markdown(
     """
     <style>
-    /* Typography & Core Surfaces */
-    .stApp {
-        background-color: #0b1120;
-        color: #f8fafc;
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600&family=Raleway:wght@300;400;500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap');
+
+    :root {
+        --coral: #D9715A;
+        --coral-light: #F0A892;
+        --coral-dark: #A04030;
+        --teal: #3ABFB2;
+        --teal-light: #7ADBD3;
+        --teal-dark: #1E8C82;
+        --navy: #0A1628;
+        --navy-mid: #142236;
+        --navy-light: #1E3350;
+        --lavender: #7B7DC0;
+        --lavender-light: #A9AADC;
+        --steel: #6B8FAB;
+        --cream: #F7F3ED;
+        --warm-white: #FAFAF8;
+        --charcoal: #1E1E2A;
+        --muted: rgba(247, 243, 237, 0.55);
+        --muted-strong: rgba(247, 243, 237, 0.85);
+        --ff-display: 'Cormorant Garamond', Georgia, serif;
+        --ff-body: 'Raleway', -apple-system, BlinkMacSystemFont, sans-serif;
+        --ff-mono: 'Space Mono', 'Consolas', monospace;
     }
 
-    /* Executive Header */
-    .exec-header-card {
-        background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-        border: 1px solid #334155;
-        border-radius: 10px;
-        padding: 1.5rem 1.75rem;
-        margin-bottom: 1.25rem;
-        box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.4);
+    /* Core Application Surface */
+    .stApp {
+        background-color: var(--navy);
+        color: var(--cream);
+        font-family: var(--ff-body);
+        font-weight: 300;
+        line-height: 1.65;
     }
-    .exec-doc-badge {
-        display: inline-block;
-        font-family: "JetBrains Mono", "SF Mono", monospace;
-        font-size: 0.75rem;
-        font-weight: 700;
-        letter-spacing: 0.08em;
+
+    /* Executive Typography Overrides */
+    h1, h2, h3, h4, h5, h6 {
+        font-family: var(--ff-display) !important;
+        color: var(--cream) !important;
+        font-weight: 600 !important;
+        letter-spacing: -0.01em;
+    }
+
+    /* Sidebar Styling */
+    section[data-testid="stSidebar"] {
+        background-color: #0c182c !important;
+        border-right: 1px solid rgba(58, 191, 178, 0.18) !important;
+    }
+    section[data-testid="stSidebar"] h1,
+    section[data-testid="stSidebar"] h2,
+    section[data-testid="stSidebar"] h3,
+    section[data-testid="stSidebar"] h4 {
+        font-family: var(--ff-display) !important;
+        color: var(--cream) !important;
+        font-weight: 600 !important;
+    }
+    section[data-testid="stSidebar"] .stMarkdown p {
+        font-size: 0.88rem;
+        color: var(--muted-strong);
+    }
+
+    /* Brand Header Block */
+    .brand-header-card {
+        position: relative;
+        background: linear-gradient(145deg, #0A1628 0%, #142236 100%);
+        border: 1px solid rgba(58, 191, 178, 0.22);
+        border-radius: 8px;
+        padding: 1.75rem 2rem;
+        margin-bottom: 1.5rem;
+        box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.6);
+        overflow: hidden;
+    }
+    .brand-top-accent {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3.5px;
+        background: linear-gradient(90deg, #0A1628 0%, #3ABFB2 45%, #D9715A 100%);
+    }
+    .brand-header-flex {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1.75rem;
+    }
+    .brand-header-text {
+        flex: 1;
+    }
+    .brand-logo-img {
+        width: 100px;
+        height: 100px;
+        object-fit: contain;
+        filter: drop-shadow(0 4px 14px rgba(58, 191, 178, 0.25));
+    }
+    .brand-label-row {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 0.5rem;
+    }
+    .brand-pill {
+        font-family: var(--ff-mono);
+        font-size: 0.72rem;
+        letter-spacing: 0.16em;
         text-transform: uppercase;
-        color: #38bdf8;
-        background: rgba(56, 189, 248, 0.1);
-        border: 1px solid rgba(56, 189, 248, 0.3);
-        padding: 3px 10px;
-        border-radius: 4px;
-        margin-bottom: 0.75rem;
+        color: var(--teal);
+        font-weight: 700;
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
     }
-    .exec-title {
-        font-size: 2.1rem;
-        font-weight: 800;
-        letter-spacing: -0.025em;
-        color: #f8fafc;
+    .brand-pill::before {
+        content: "";
+        display: inline-block;
+        width: 7px;
+        height: 7px;
+        background: var(--coral);
+        border-radius: 50%;
+    }
+    .brand-doc-code {
+        font-family: var(--ff-mono);
+        font-size: 0.72rem;
+        color: var(--muted);
+        letter-spacing: 0.12em;
+        border-left: 1px solid rgba(247, 243, 237, 0.2);
+        padding-left: 10px;
+    }
+    .brand-hero-title {
+        font-family: var(--ff-display);
+        font-size: 2.35rem;
+        font-weight: 600;
+        line-height: 1.1;
+        color: var(--cream);
         margin: 0 0 0.4rem 0;
-        line-height: 1.2;
     }
-    .exec-subtitle {
+    .brand-hero-subtitle {
+        font-family: var(--ff-body);
         font-size: 0.95rem;
-        color: #94a3b8;
-        margin: 0 0 1rem 0;
+        font-weight: 300;
+        color: var(--muted-strong);
         line-height: 1.5;
+        margin: 0 0 1rem 0;
     }
-    .exec-meta-grid {
+    .brand-meta-grid {
         display: flex;
         flex-wrap: wrap;
         gap: 1.5rem;
-        border-top: 1px solid #334155;
+        border-top: 1px solid rgba(247, 243, 237, 0.1);
         padding-top: 0.85rem;
         font-size: 0.82rem;
-        color: #64748b;
+        color: var(--muted);
+        font-family: var(--ff-body);
     }
-    .exec-meta-item strong {
-        color: #e2e8f0;
+    .brand-meta-item strong {
+        color: var(--teal);
         font-weight: 600;
     }
 
-    /* Guide / Onboarding Box */
-    .exec-guide-box {
-        background: #0f172a;
-        border: 1px solid #1e293b;
-        border-left: 4px solid #0284c7;
-        border-radius: 8px;
+    /* Editorial Cards */
+    .brand-card {
+        background: var(--navy-mid);
+        border: 1px solid rgba(247, 243, 237, 0.08);
+        border-radius: 6px;
         padding: 1.25rem 1.5rem;
-        margin-bottom: 1.25rem;
+        margin-bottom: 1.15rem;
     }
-    .exec-guide-title {
-        font-size: 0.92rem;
-        font-weight: 700;
-        color: #38bdf8;
-        letter-spacing: 0.04em;
+    .brand-card.teal-accent {
+        border-left: 3.5px solid var(--teal);
+    }
+    .brand-card.coral-accent {
+        border-left: 3.5px solid var(--coral);
+    }
+    .brand-card.lavender-accent {
+        border-left: 3.5px solid var(--lavender);
+    }
+
+    /* Onboarding Guide Box */
+    .brand-guide-title {
+        font-family: var(--ff-mono);
+        font-size: 0.8rem;
+        letter-spacing: 0.14em;
         text-transform: uppercase;
+        color: var(--teal);
+        font-weight: 700;
         margin-bottom: 0.5rem;
     }
-    .exec-guide-text {
-        font-size: 0.88rem;
-        color: #cbd5e1;
+    .brand-guide-text {
+        font-size: 0.9rem;
+        color: var(--muted-strong);
         line-height: 1.6;
         margin: 0;
     }
-    .exec-guide-step-grid {
+    .brand-guide-grid {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
-        gap: 1rem;
-        margin-top: 1rem;
+        gap: 1.1rem;
+        margin-top: 1.15rem;
     }
-    .exec-guide-step {
-        background: #1e293b;
-        border: 1px solid #334155;
-        border-radius: 6px;
-        padding: 0.85rem 1rem;
-        font-size: 0.83rem;
-        color: #94a3b8;
-        line-height: 1.45;
-    }
-    .exec-guide-step strong {
-        color: #38bdf8;
-        display: block;
-        margin-bottom: 0.3rem;
-        font-size: 0.86rem;
-    }
-
-    /* Explainer Cards */
-    .exec-card-explainer {
-        background: #0f172a;
-        border: 1px solid #1e293b;
-        border-radius: 6px;
-        padding: 0.9rem 1.15rem;
-        margin-bottom: 0.85rem;
-    }
-    .exec-card-explainer strong {
-        color: #38bdf8;
-        font-size: 0.86rem;
-    }
-    .exec-card-explainer p {
-        color: #94a3b8;
-        font-size: 0.82rem;
-        margin: 0.3rem 0 0 0;
-        line-height: 1.45;
-    }
-
-    /* Executive KPI Metric Cards */
-    .exec-kpi-card {
-        background: #0f172a;
-        border: 1px solid #1e293b;
-        border-radius: 8px;
+    .brand-guide-col {
+        background: #0f1d30;
+        border: 1px solid rgba(58, 191, 178, 0.15);
+        border-radius: 4px;
         padding: 1rem 1.15rem;
-        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
-        height: 100%;
+        font-size: 0.85rem;
+        color: var(--muted-strong);
+        line-height: 1.5;
+    }
+    .brand-guide-col strong {
+        font-family: var(--ff-mono);
+        color: var(--coral-light);
+        display: block;
+        margin-bottom: 0.4rem;
+        font-size: 0.8rem;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+    }
+
+    /* KPI Metrics Cards */
+    .brand-kpi-card {
+        background: var(--navy-mid);
+        border: 1px solid rgba(247, 243, 237, 0.08);
+        border-top: 3px solid var(--teal);
+        border-radius: 6px;
+        padding: 1.1rem 1.2rem;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
+        height: 100%;
+        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
     }
-    .exec-kpi-label {
-        font-size: 0.75rem;
-        font-weight: 600;
+    .brand-kpi-card.coral-top {
+        border-top-color: var(--coral);
+    }
+    .brand-kpi-card.lavender-top {
+        border-top-color: var(--lavender);
+    }
+    .brand-kpi-card.steel-top {
+        border-top-color: var(--steel);
+    }
+    .brand-kpi-label {
+        font-family: var(--ff-mono);
+        font-size: 0.68rem;
+        letter-spacing: 0.13em;
         text-transform: uppercase;
-        letter-spacing: 0.06em;
-        color: #94a3b8;
-        margin-bottom: 0.3rem;
+        color: var(--teal-light);
+        margin-bottom: 0.35rem;
+        font-weight: 700;
     }
-    .exec-kpi-val {
-        font-size: 1.7rem;
-        font-weight: 800;
-        font-family: "JetBrains Mono", "SF Mono", monospace;
-        color: #f8fafc;
-        line-height: 1.15;
-    }
-    .exec-badge-emerald {
-        display: inline-block;
-        margin-top: 0.45rem;
-        font-size: 0.78rem;
+    .brand-kpi-val {
+        font-family: var(--ff-display);
+        font-size: 1.95rem;
         font-weight: 600;
-        color: #10b981;
-        background: rgba(16, 185, 129, 0.12);
-        border: 1px solid rgba(16, 185, 129, 0.25);
+        color: var(--cream);
+        line-height: 1.1;
+    }
+    .brand-kpi-badge {
+        font-family: var(--ff-mono);
+        font-size: 0.72rem;
+        letter-spacing: 0.05em;
+        margin-top: 0.45rem;
         padding: 2px 7px;
-        border-radius: 4px;
+        border-radius: 3px;
         width: fit-content;
     }
-    .exec-badge-ruby {
-        display: inline-block;
-        margin-top: 0.45rem;
-        font-size: 0.78rem;
-        font-weight: 600;
-        color: #ef4444;
-        background: rgba(239, 68, 68, 0.12);
-        border: 1px solid rgba(239, 68, 68, 0.25);
-        padding: 2px 7px;
-        border-radius: 4px;
-        width: fit-content;
+    .badge-teal {
+        background: rgba(58, 191, 178, 0.12);
+        color: var(--teal-light);
+        border: 1px solid rgba(58, 191, 178, 0.3);
     }
-    .exec-badge-amber {
-        display: inline-block;
-        margin-top: 0.45rem;
-        font-size: 0.78rem;
-        font-weight: 600;
-        color: #fbbf24;
-        background: rgba(251, 191, 36, 0.12);
-        border: 1px solid rgba(251, 191, 36, 0.25);
-        padding: 2px 7px;
-        border-radius: 4px;
-        width: fit-content;
+    .badge-coral {
+        background: rgba(217, 113, 90, 0.12);
+        color: var(--coral-light);
+        border: 1px solid rgba(217, 113, 90, 0.3);
     }
-    .exec-badge-cyan {
-        display: inline-block;
-        margin-top: 0.45rem;
-        font-size: 0.78rem;
-        font-weight: 600;
-        color: #38bdf8;
-        background: rgba(56, 189, 248, 0.12);
-        border: 1px solid rgba(56, 189, 248, 0.25);
-        padding: 2px 7px;
-        border-radius: 4px;
-        width: fit-content;
+    .badge-lavender {
+        background: rgba(123, 125, 192, 0.12);
+        color: var(--lavender-light);
+        border: 1px solid rgba(123, 125, 192, 0.3);
     }
 
-    /* Executive Technical Seal */
-    .exec-seal-container {
+    /* Insight Card */
+    .brand-insight-box {
+        background: #0f1d30;
+        border: 1px solid rgba(247, 243, 237, 0.08);
+        border-left: 3.5px solid var(--coral);
+        border-radius: 0 4px 4px 0;
+        padding: 0.95rem 1.25rem;
+        margin-bottom: 0.85rem;
+    }
+    .brand-insight-title {
+        font-family: var(--ff-mono);
+        font-size: 0.72rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--coral-light);
+        font-weight: 700;
+        margin-bottom: 0.25rem;
+    }
+    .brand-insight-text {
+        font-size: 0.84rem;
+        color: var(--muted-strong);
+        line-height: 1.5;
+        margin: 0;
+    }
+
+    /* Section Subheadings */
+    .brand-section-header {
+        font-family: var(--ff-display);
+        font-size: 1.45rem;
+        font-weight: 600;
+        color: var(--cream);
+        margin-top: 0.75rem;
+        margin-bottom: 0.35rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    /* Tabs Styling (Eliminates Streamlit Red Accent) */
+    .stTabs [data-baseweb="tab-list"] {
+        gap: 8px;
+        border-bottom: 1px solid rgba(58, 191, 178, 0.2) !important;
+        background: transparent !important;
+    }
+    .stTabs [data-baseweb="tab"] {
+        font-family: var(--ff-mono) !important;
+        font-size: 0.78rem !important;
+        letter-spacing: 0.08em !important;
+        text-transform: uppercase !important;
+        color: var(--muted) !important;
+        padding: 10px 18px !important;
+        border-radius: 4px 4px 0 0 !important;
+        background: transparent !important;
+        border-bottom: 2px solid transparent !important;
+    }
+    .stTabs [data-baseweb="tab"]:hover {
+        color: var(--teal-light) !important;
+    }
+    .stTabs [aria-selected="true"] {
+        color: var(--teal) !important;
+        border-bottom: 2.5px solid var(--teal) !important;
+        font-weight: 700 !important;
+        background: rgba(58, 191, 178, 0.05) !important;
+    }
+
+    /* Primary Buttons & Interactive Controls */
+    div.stButton > button[kind="primary"],
+    div.stFormSubmitButton > button {
+        background: var(--teal-dark) !important;
+        color: var(--cream) !important;
+        border: 1px solid var(--teal) !important;
+        font-family: var(--ff-body) !important;
+        font-weight: 600 !important;
+        letter-spacing: 0.05em !important;
+        border-radius: 4px !important;
+        padding: 0.55rem 1.35rem !important;
+        transition: all 0.25s ease !important;
+    }
+    div.stButton > button[kind="primary"]:hover,
+    div.stFormSubmitButton > button:hover {
+        background: var(--teal) !important;
+        color: var(--navy) !important;
+        box-shadow: 0 4px 16px rgba(58, 191, 178, 0.4) !important;
+    }
+
+    /* Formal Validation Seal */
+    .brand-seal-box {
         margin-top: 2.5rem;
-        padding: 1.25rem 1.5rem;
-        background: #0f172a;
-        border: 1px solid #334155;
-        border-radius: 8px;
+        padding: 1.35rem 1.65rem;
+        background: #0c182c;
+        border: 1px solid rgba(58, 191, 178, 0.25);
+        border-radius: 6px;
         display: flex;
         justify-content: space-between;
         align-items: center;
         flex-wrap: wrap;
-        gap: 1rem;
+        gap: 1.25rem;
     }
-    .exec-seal-title {
-        font-size: 0.85rem;
-        font-weight: 700;
-        color: #e2e8f0;
-        letter-spacing: 0.02em;
-    }
-    .exec-seal-desc {
-        font-size: 0.78rem;
-        color: #94a3b8;
-    }
-    .exec-seal-auth {
-        text-align: right;
+    .brand-seal-title {
+        font-family: var(--ff-mono);
         font-size: 0.8rem;
-        color: #38bdf8;
-        font-family: "JetBrains Mono", monospace;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--teal);
+        font-weight: 700;
+        margin-bottom: 0.25rem;
+    }
+    .brand-seal-desc {
+        font-size: 0.82rem;
+        color: var(--muted);
+        line-height: 1.45;
+    }
+    .brand-seal-auth {
+        text-align: right;
+        font-family: var(--ff-mono);
+        font-size: 0.78rem;
+        color: var(--coral-light);
+        line-height: 1.4;
+    }
+    .brand-seal-auth strong {
+        font-family: var(--ff-display);
+        font-size: 1.1rem;
+        color: var(--cream);
+        display: block;
     }
     </style>
     """,
     unsafe_allow_html=True,
 )
 
-# Header Formal Block
-st.markdown(
+# Header Formal Block with Authentic AquaBiotics Sur Identity
+logo_b64 = get_brand_logo_b64()
+logo_img_tag = (
+    f'<img src="data:image/png;base64,{logo_b64}" class="brand-logo-img" alt="AquaBiotics Sur" />'
+    if logo_b64
+    else """
+    <div style="width: 80px; height: 80px; border-radius: 50%; border: 1.5px solid #3ABFB2; display: flex; align-items: center; justify-content: center; font-family: 'Space Mono', monospace; font-size: 11px; color: #3ABFB2;">
+        AB SUR
+    </div>
     """
-    <div class="exec-header-card">
-        <span class="exec-doc-badge">AUDITORÍA REGULATORIA • REG-AUD-2026-v1.4</span>
-        <h1 class="exec-title">ReguTech-AI Auditor</h1>
-        <p class="exec-subtitle">
-            Motor Determinista de Liberación de Lotes y Verificación de Certificados de Análisis (CoA)
-            bajo Monografías Farmacopeicas (USP / Ph. Eur.). Arquitectura Cero-Alucinación mediante Invariante de Subcadena Exacta.
-        </p>
-        <div class="exec-meta-grid">
-            <div class="exec-meta-item"><strong>Auditor Responsable:</strong> Byron M. Calderón González (UNAB Top 25%)</div>
-            <div class="exec-meta-item"><strong>Marco Regulatorio:</strong> 21 CFR Part 211 / GMP Anexo 16 (Qualified Person)</div>
-            <div class="exec-meta-item"><strong>Seguridad Semántica:</strong> Exact-Quote Substring Invariant (Zero-Hallucination)</div>
-            <div class="exec-meta-item"><strong>Contratos de Datos:</strong> Esquemas Inmutables Pydantic v2</div>
+)
+
+st.markdown(
+    f"""
+    <div class="brand-header-card">
+        <div class="brand-top-accent"></div>
+        <div class="brand-header-flex">
+            <div class="brand-header-text">
+                <div class="brand-label-row">
+                    <span class="brand-pill">AquaBiotics Sur · Aseguramiento de Calidad &amp; I+D</span>
+                    <span class="brand-doc-code">DICTAMEN TÉCNICO-LEGAL · AB-SUR-REG-2026-v2.2</span>
+                </div>
+                <h1 class="brand-hero-title">
+                    Aqua<span style="color: #3ABFB2;">Biotics</span> <span style="color: #D9715A; font-style: italic;">Sur</span>
+                    <span style="font-size: 0.65em; font-weight: 300; opacity: 0.85;">· ReguTech-AI Auditor</span>
+                </h1>
+                <p class="brand-hero-subtitle">
+                    Motor Determinista de Liberación de Lotes y Verificación de Certificados de Análisis (CoA)
+                    bajo Monografías Farmacopeicas (USP / Ph. Eur.). Arquitectura Cero-Alucinación mediante Invariante de Subcadena Exacta.
+                </p>
+                <div class="brand-meta-grid">
+                    <div class="brand-meta-item"><strong>Auditor Responsable:</strong> Byron M. Calderón González (UNAB Top 25%)</div>
+                    <div class="brand-meta-item"><strong>Operación &amp; Sede:</strong> CEO AquaBiotics Sur · Puerto Montt, Región de Los Lagos</div>
+                    <div class="brand-meta-item"><strong>Marco Regulatorio:</strong> 21 CFR Part 211 / GMP Anexo 16 (Qualified Person)</div>
+                    <div class="brand-meta-item"><strong>Seguridad Semántica:</strong> Exact-Quote Substring Invariant (Zero-Hallucination)</div>
+                </div>
+            </div>
+            <div>
+                {logo_img_tag}
+            </div>
         </div>
     </div>
     """,
@@ -294,9 +510,9 @@ st.markdown(
 with st.expander("📌 ¿QUÉ ES ESTA PLATAFORMA Y CUÁL ES SU PROPÓSITO? (Guía de Auditoría para Primeros Visitantes)", expanded=True):
     st.markdown(
         """
-        <div class="exec-guide-box">
-            <div class="exec-guide-title">🎯 Propósito Estratégico & Problema Farmacéutico que Resuelve</div>
-            <p class="exec-guide-text">
+        <div class="brand-card teal-accent" style="margin-bottom: 0;">
+            <div class="brand-guide-title">🎯 Propósito Estratégico & Problema Farmacéutico que Resuelve</div>
+            <p class="brand-guide-text">
                 En la industria biofarmacéutica y de ingredientes activos (APIs), la liberación de un lote al mercado exige verificar
                 que cada parámetro del Certificado de Análisis (CoA) cumpla rigurosamente con los límites de la Farmacopea Oficial (USP / Ph. Eur.).
                 Los LLMs convencionales son peligrosos en este entorno porque sufren de <strong>alucinaciones numéricas</strong> e inventan citas textuales.<br><br>
@@ -305,16 +521,16 @@ with st.expander("📌 ¿QUÉ ES ESTA PLATAFORMA Y CUÁL ES SU PROPÓSITO? (Guí
                 y verificación matemática determinista de límites. El sistema actúa como un <strong>co-piloto infalible para el Qualified Person (QP)</strong>,
                 garantizando liberación de lotes en segundos con trazabilidad 100% auditable.
             </p>
-            <div class="exec-guide-step-grid">
-                <div class="exec-guide-step">
+            <div class="brand-guide-grid">
+                <div class="brand-guide-col">
                     <strong>1. Selección de Monografía</strong>
                     En el panel lateral izquierdo, selecciona el estándar farmacopeico oficial (ej. Insulina Humana Recombinante USP o Trehalosa Ph. Eur.).
                 </div>
-                <div class="exec-guide-step">
+                <div class="brand-guide-col">
                     <strong>2. Ingesta de Lote (CoA)</strong>
                     Selecciona un lote conforme de referencia, un lote con contaminación crítica, o prueba el modo adversarial con citas falsificadas.
                 </div>
-                <div class="exec-guide-step">
+                <div class="brand-guide-col">
                     <strong>3. Veredicto & Trazabilidad</strong>
                     Revisa la disposición formal del lote (APROBADO / RECHAZADO / OBSERVADO), inspecciona la cita literal resaltada en el texto original y descarga el dossier.
                 </div>
@@ -440,29 +656,32 @@ report = auditor.audit_batch(
     dossier=dossier,
 )
 
-# Display Executive Verdict & KPI Metrics
+# Display Executive Verdict & KPI Metrics (AquaBiotics Sur Style)
 col1, col2, col3, col4, col5 = st.columns(5)
 
 with col1:
     if report.verdict == OverallVerdict.APPROVED:
-        verdict_badge = "exec-badge-emerald"
+        verdict_top = ""
+        verdict_badge = "badge-teal"
         verdict_text = "APROBADO"
         verdict_sub = "100% Conforme"
     elif report.verdict == OverallVerdict.REJECTED:
-        verdict_badge = "exec-badge-ruby"
+        verdict_top = "coral-top"
+        verdict_badge = "badge-coral"
         verdict_text = "RECHAZADO"
         verdict_sub = f"{report.failed_count} Fallas Críticas"
     else:
-        verdict_badge = "exec-badge-amber"
+        verdict_top = "lavender-top"
+        verdict_badge = "badge-lavender"
         verdict_text = "OBSERVADO"
         verdict_sub = "En Revisión QP"
 
     st.markdown(
         f"""
-        <div class="exec-kpi-card">
-            <div class="exec-kpi-label">Disposición de Lote</div>
-            <div class="exec-kpi-val">{verdict_text}</div>
-            <div class="{verdict_badge}">{verdict_sub}</div>
+        <div class="brand-kpi-card {verdict_top}">
+            <div class="brand-kpi-label">Disposición de Lote</div>
+            <div class="brand-kpi-val">{verdict_text}</div>
+            <div class="brand-kpi-badge {verdict_badge}">{verdict_sub}</div>
         </div>
         """,
         unsafe_allow_html=True,
@@ -471,10 +690,10 @@ with col1:
 with col2:
     st.markdown(
         f"""
-        <div class="exec-kpi-card">
-            <div class="exec-kpi-label">Índice de Cumplimiento</div>
-            <div class="exec-kpi-val">{report.compliance_score}%</div>
-            <div class="exec-badge-cyan">Ponderación CQA</div>
+        <div class="brand-kpi-card">
+            <div class="brand-kpi-label">Índice de Cumplimiento</div>
+            <div class="brand-kpi-val">{report.compliance_score}%</div>
+            <div class="brand-kpi-badge badge-teal">Ponderación CQA</div>
         </div>
         """,
         unsafe_allow_html=True,
@@ -483,10 +702,10 @@ with col2:
 with col3:
     st.markdown(
         f"""
-        <div class="exec-kpi-card">
-            <div class="exec-kpi-label">Ensayos Evaluados</div>
-            <div class="exec-kpi-val">{report.total_tests}</div>
-            <div class="exec-badge-cyan">Total Parámetros</div>
+        <div class="brand-kpi-card steel-top">
+            <div class="brand-kpi-label">Ensayos Evaluados</div>
+            <div class="brand-kpi-val">{report.total_tests}</div>
+            <div class="brand-kpi-badge badge-teal">Total Compendio</div>
         </div>
         """,
         unsafe_allow_html=True,
@@ -495,23 +714,24 @@ with col3:
 with col4:
     st.markdown(
         f"""
-        <div class="exec-kpi-card">
-            <div class="exec-kpi-label">Ensayos Conformes</div>
-            <div class="exec-kpi-val">{report.passed_count}</div>
-            <div class="exec-badge-emerald">{report.passed_count}/{report.total_tests} Conformes</div>
+        <div class="brand-kpi-card">
+            <div class="brand-kpi-label">Ensayos Conformes</div>
+            <div class="brand-kpi-val">{report.passed_count}</div>
+            <div class="brand-kpi-badge badge-teal">{report.passed_count}/{report.total_tests} Conformes</div>
         </div>
         """,
         unsafe_allow_html=True,
     )
 
 with col5:
-    unver_badge = "exec-badge-ruby" if report.unverified_count > 0 else "exec-badge-amber"
+    unver_top = "coral-top" if report.unverified_count > 0 else "lavender-top"
+    unver_badge = "badge-coral" if report.unverified_count > 0 else "badge-lavender"
     st.markdown(
         f"""
-        <div class="exec-kpi-card">
-            <div class="exec-kpi-label">Alertas / No Verif.</div>
-            <div class="exec-kpi-val">{report.warning_count} / {report.unverified_count}</div>
-            <div class="{unver_badge}">Alerta Temprana</div>
+        <div class="brand-kpi-card {unver_top}">
+            <div class="brand-kpi-label">Alertas / No Verif.</div>
+            <div class="brand-kpi-val">{report.warning_count} / {report.unverified_count}</div>
+            <div class="brand-kpi-badge {unver_badge}">Alerta Temprana</div>
         </div>
         """,
         unsafe_allow_html=True,
@@ -524,31 +744,31 @@ with st.expander("💡 ¿CÓMO INTERPRETAR ESTOS 5 RESULTADOS REGULATORIOS?", ex
     st.markdown(
         """
         <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin-top: 0.25rem;">
-            <div class="exec-card-explainer">
-                <strong style="color: #10b981;">📋 Disposición de Lote (Batch Verdict):</strong>
-                <p>
+            <div class="brand-insight-box">
+                <div class="brand-insight-title">📋 Disposición de Lote (Batch Verdict):</div>
+                <p class="brand-insight-text">
                     Dictamen formal de calidad conforme a GMP Anexo 16. <strong>APROBADO</strong> autoriza la salida a distribución comercial.
                     <strong>RECHAZADO</strong> exige cuarentena inmediata por incumplimiento de Atributos Críticos de Calidad (CQA).
                     <strong>OBSERVADO</strong> alerta desvíos preventivos que requieren firma del Qualified Person (QP).
                 </p>
             </div>
-            <div class="exec-card-explainer">
-                <strong style="color: #38bdf8;">📊 Índice de Cumplimiento (%):</strong>
-                <p>
+            <div class="brand-insight-box" style="border-left-color: var(--teal);">
+                <div class="brand-insight-title" style="color: var(--teal-light);">📊 Índice de Cumplimiento (%):</div>
+                <p class="brand-insight-text">
                     Puntuación normalizada de adhesión al compendio oficial, ponderando con mayor peso los ensayos críticos (endotoxinas, bioburden, impurezas relacionadas)
                     respecto a características organolépticas generales.
                 </p>
             </div>
-            <div class="exec-card-explainer">
-                <strong style="color: #fbbf24;">⚠️ Alertas Preventivas (Early-Warning &ge; 85%):</strong>
-                <p>
+            <div class="brand-insight-box" style="border-left-color: var(--lavender);">
+                <div class="brand-insight-title" style="color: var(--lavender-light);">⚠️ Alertas Preventivas (Early-Warning &ge; 85%):</div>
+                <p class="brand-insight-text">
                     Mide parámetros que, aunque todavía están dentro del límite legal, alcanzaron más del 85% del valor máximo admisible.
                     Esto previene fallas futuras identificando tendencias de deriva en el proceso de fermentación o purificación.
                 </p>
             </div>
-            <div class="exec-card-explainer">
-                <strong style="color: #ef4444;">🛡️ No Verificados (Violación de Invariante):</strong>
-                <p>
+            <div class="brand-insight-box" style="border-left-color: var(--coral);">
+                <div class="brand-insight-title">🛡️ No Verificados (Violación de Invariante):</div>
+                <p class="brand-insight-text">
                     Si un modelo de IA intentara extraer una lectura inventada o alucinada que no existe textualmente en el certificado original,
                     el sistema la marca inmediatamente como 'No Verificado' y bloquea la liberación automática del lote.
                 </p>
@@ -578,9 +798,11 @@ tab1, tab2, tab3, tab4 = st.tabs([
 with tab1:
     st.markdown(
         """
-        <div class="exec-card-explainer" style="margin-bottom: 1.25rem;">
-            <strong>📖 ¿Cómo leer esta Matriz de Auditoría?</strong>
-            <p>
+        <div class="brand-card teal-accent" style="margin-bottom: 1.25rem;">
+            <strong style="color: var(--teal); font-family: var(--ff-mono); font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase;">
+                📖 ¿Cómo leer esta Matriz de Auditoría?
+            </strong>
+            <p style="color: var(--muted-strong); font-size: 0.85rem; margin-top: 0.35rem; line-height: 1.5;">
                 Cada fila representa un ensayo analítico oficial. La columna <strong>Desviación</strong> calcula en tiempo real el porcentaje
                 de margen restante frente al límite superior farmacopeico. Los parámetros marcados como <strong>Atributo Crítico (CQA)</strong>
                 tienen impacto directo en la seguridad del paciente y son de rechazo inexcusable en caso de falla.
@@ -623,12 +845,14 @@ with tab1:
         st.info("No hay parámetros que coincidan con el filtro seleccionado.")
 
 with tab2:
-    st.markdown("### 🔍 Trazabilidad de Evidencia Textual Cero-Alucinación")
+    st.markdown('<div class="brand-section-header">Trazabilidad de Evidencia Textual Cero-Alucinación</div>', unsafe_allow_html=True)
     st.markdown(
         """
-        <div class="exec-card-explainer" style="margin-bottom: 1.25rem;">
-            <strong>📖 ¿Qué significa esta Vista de Doble Pantalla?</strong>
-            <p>
+        <div class="brand-card lavender-accent" style="margin-bottom: 1.25rem;">
+            <strong style="color: var(--lavender-light); font-family: var(--ff-mono); font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase;">
+                📖 ¿Qué significa esta Vista de Doble Pantalla?
+            </strong>
+            <p style="color: var(--muted-strong); font-size: 0.85rem; margin-top: 0.35rem; line-height: 1.5;">
                 A la izquierda, seleccionas cualquier parámetro analizado. A la derecha, el visor localiza y
                 <strong>resalta exactamente la cita textual literal</strong> encontrada dentro del documento original ingerido.<br>
                 Si alguien intenta falsificar o adulterar una lectura, el <strong>Invariante de Subcadena</strong> detecta que el texto
@@ -671,12 +895,14 @@ with tab2:
             st.text_area("Contenido Ingerido:", raw_text, height=350)
 
 with tab3:
-    st.markdown("### 📄 Exportación de Dossier de Calidad y Cumplimiento")
+    st.markdown('<div class="brand-section-header">Exportación de Dossier de Calidad y Cumplimiento</div>', unsafe_allow_html=True)
     st.markdown(
         """
-        <div class="exec-card-explainer" style="margin-bottom: 1.25rem;">
-            <strong>📖 Propósito de Integración con Sistemas Regulados (21 CFR Part 11):</strong>
-            <p>
+        <div class="brand-card" style="border-left: 3.5px solid var(--steel); margin-bottom: 1.25rem;">
+            <strong style="color: var(--steel); font-family: var(--ff-mono); font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase;">
+                📖 Propósito de Integración con Sistemas Regulados (21 CFR Part 11):
+            </strong>
+            <p style="color: var(--muted-strong); font-size: 0.85rem; margin-top: 0.35rem; line-height: 1.5;">
                 Permite exportar el dictamen formal en formatos auditables para archivado permanente en el dossier de liberación de la planta:<br>
                 • <strong>JSON (LIMS):</strong> Contrato de datos Pydantic v2 inmutable para registro en base de datos regulatoria.<br>
                 • <strong>Markdown (Release Summary):</strong> Acta técnica imprimible para firma manuscrita o electrónica del Director Técnico / Qualified Person.
@@ -692,7 +918,7 @@ with tab3:
         data=json_dossier,
         file_name=f"audit_{report.batch_id}.json",
         mime="application/json",
-        use_container_width=True,
+        width="stretch",
     )
 
     md_summary = (
@@ -711,7 +937,7 @@ with tab3:
         f"- Critical Specification Failures: {report.failed_count}\n"
         f"- Unverified Evidence Quotes: {report.unverified_count}\n\n"
         f"---\n"
-        f"*Generated by ReguTech-AI Auditor • Byron Calderón González (UNAB Top 25%)*\n"
+        f"*Generated by ReguTech-AI Auditor • AquaBiotics Sur • Byron Calderón González (UNAB Top 25%)*\n"
     )
     st.text_area("Vista Previa del Resumen Técnico (Markdown):", md_summary, height=200)
     st.download_button(
@@ -719,11 +945,11 @@ with tab3:
         data=md_summary,
         file_name=f"release_summary_{report.batch_id}.md",
         mime="text/markdown",
-        use_container_width=True,
+        width="stretch",
     )
 
 with tab4:
-    st.markdown('<div class="exec-section-heading">Fundamentos GMP, Validación de Software & Arquitectura Cero-Alucinación</div>', unsafe_allow_html=True)
+    st.markdown('<div class="brand-section-header">Fundamentos GMP, Validación FDA & Arquitectura Cero-Alucinación</div>', unsafe_allow_html=True)
     st.markdown(
         r"""
         ### 1. El Problema Crítico de la Industria Biofarmacéutica
@@ -759,6 +985,14 @@ with tab4:
           No. Si un solo Atributo Crítico de Calidad (CQA) como endotoxinas bacterianas, bioburden o impurezas de alto peso molecular (HMWP) excede el límite de la monografía, el sistema bloquea inmediatamente la liberación y emite un veredicto mandatorio de **RECHAZADO (Cuarentena Inmediata)**.
         - **¿Cómo se valida este software frente a una inspección de la FDA?**
           El software cuenta con una suite completa de pruebas unitarias automatizadas (Pytest) con cobertura del 100% en las reglas de decisión, trazabilidad determinista de citas y esquemas de datos Pydantic v2 inmutables, cumpliendo los principios de integridad de datos ALCOA+ (Atribuible, Legible, Contemporáneo, Original y Exacto).
+
+        ### 5. Marco Regulatorio y Referencias Oficiales
+        - **FDA 21 CFR Part 211.165:** *Testing and release for distribution*.
+        - **FDA 21 CFR Part 11:** *Electronic Records; Electronic Signatures; Final Rule*.
+        - **EMA EudraLex Volume 4, Annex 16:** *Certification by a Qualified Person and Batch Release*.
+        - **United States Pharmacopeia (USP-NF 2024):** Monograph *Insulin Human Injectable*.
+        - **European Pharmacopoeia (Ph. Eur. 10.0):** Monograph 01/2020:1379 *Trehalose Dihydrate*.
+        - **ISPE GAMP 5:** *A Risk-Based Approach to Compliant GxP Computerized Systems*.
         """
     )
 
@@ -766,18 +1000,18 @@ with tab4:
 # Formal Institutional Validation Seal (Skill Directive)
 st.markdown(
     """
-    <div class="exec-seal-container">
+    <div class="brand-seal-box">
         <div>
-            <div class="exec-seal-title">CERTIFICACIÓN DE INTEGRIDAD REGULATORIA GMP & CERO-ALUCINACIÓN</div>
-            <div class="exec-seal-desc">
-                Sistema auditado bajo estándares de validación de software computarizado (GAMP 5 / 21 CFR Part 11).
-                Invariante de subcadena exacto • Detección determinista de límites farmacopeicos.
+            <div class="brand-seal-title">CERTIFICACIÓN DE INTEGRIDAD REGULATORIA GMP & CERO-ALUCINACIÓN</div>
+            <div class="brand-seal-desc">
+                Sistema auditado bajo estándares de validación de software computarizado (GAMP 5 / 21 CFR Part 11).<br>
+                Invariante de subcadena exacto • Detección determinista de límites farmacopeicos • Código: AB-SUR-REG-2026.
             </div>
         </div>
-        <div class="exec-seal-auth">
-            <strong>Ing. Byron M. Calderón González</strong><br>
+        <div class="brand-seal-auth">
+            <strong>Byron M. Calderón González</strong>
             Ingeniero en Biotecnología (UNAB Top 25%)<br>
-            CEO & Fundador, AquaBiotics Sur
+            CEO &amp; Founder, AquaBiotics Sur
         </div>
     </div>
     """,
