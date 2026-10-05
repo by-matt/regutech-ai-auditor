@@ -1,7 +1,7 @@
 """Streamlit UI for ReguTech-AI Auditor - Deterministic CoA and Pharmacopeia Audit.
 
 Operational Scope: Zero-hallucination deterministic compliance auditing for pharma & biotech.
-Design Standard: AquaBiotics Sur Corporate Brand Identity · Executive Editorial & Luxury Dark System.
+Design Standard: AquaBiotics Sur Corporate Brand Identity · Executive Editorial Design System.
 """
 
 import base64
@@ -44,7 +44,7 @@ def get_brand_logo_b64() -> str:
     return ""
 
 
-# AquaBiotics Sur High-End Luxury Dark Design System
+# AquaBiotics Sur Official Brand Identity & Executive Editorial Design System
 st.markdown(
     """
     <style>
@@ -57,32 +57,30 @@ st.markdown(
         --teal: #3ABFB2;
         --teal-light: #7ADBD3;
         --teal-dark: #1E8C82;
-        --navy: #070e17;
-        --navy-surface: #0e1c2e;
-        --navy-elevated: #14273f;
+        --navy: #0A1628;
+        --navy-mid: #142236;
+        --navy-surface: #1E3350;
         --lavender: #7B7DC0;
         --lavender-light: #A9AADC;
         --steel: #6B8FAB;
         --cream: #F7F3ED;
         --warm-white: #FAFAF8;
-        --muted: rgba(247, 243, 237, 0.55);
+        --charcoal: #1E1E2A;
+        --muted: rgba(247, 243, 237, 0.62);
         --muted-strong: rgba(247, 243, 237, 0.88);
+        --border-hairline: rgba(247, 243, 237, 0.08);
+        --border-accent: rgba(58, 191, 178, 0.22);
         --ff-display: 'Cormorant Garamond', Georgia, serif;
         --ff-body: 'Raleway', -apple-system, BlinkMacSystemFont, sans-serif;
-        --ff-mono: 'Space Mono', 'Consolas', monospace;
+        --ff-mono: 'Space Mono', monospace;
     }
 
-    /* Seamless Viewport & Ambient Gradient Mesh */
+    /* Core Canvas - Solid Oceanic Navy, Zero Artificial Glows */
     #MainMenu, footer { visibility: hidden !important; }
     header[data-testid="stHeader"] { background: transparent !important; }
 
     .stApp {
         background-color: var(--navy);
-        background-image:
-            radial-gradient(circle at 10% 12%, rgba(58, 191, 178, 0.08) 0%, transparent 45%),
-            radial-gradient(circle at 90% 88%, rgba(217, 113, 90, 0.06) 0%, transparent 50%),
-            radial-gradient(circle at 50% 50%, rgba(123, 125, 192, 0.03) 0%, transparent 55%);
-        background-attachment: fixed;
         color: var(--cream);
         font-family: var(--ff-body);
         font-weight: 300;
@@ -90,7 +88,7 @@ st.markdown(
         letter-spacing: 0.01em;
     }
 
-    /* Executive Typography Overrides */
+    /* Editorial Typography */
     h1, h2, h3, h4, h5, h6 {
         font-family: var(--ff-display) !important;
         color: var(--cream) !important;
@@ -98,172 +96,164 @@ st.markdown(
         letter-spacing: -0.01em;
     }
 
-    /* Sidebar Luxury Styling */
+    /* Architectural Sidebar */
     section[data-testid="stSidebar"] {
-        background: linear-gradient(180deg, #07101c 0%, #050a12 100%) !important;
-        border-right: 1px solid rgba(58, 191, 178, 0.18) !important;
-        box-shadow: 4px 0 24px rgba(0, 0, 0, 0.5) !important;
+        background-color: #0A1424 !important;
+        border-right: 1px solid var(--border-hairline) !important;
+        box-shadow: 4px 0 20px rgba(0, 0, 0, 0.3) !important;
     }
     section[data-testid="stSidebar"] h1,
     section[data-testid="stSidebar"] h2,
     section[data-testid="stSidebar"] h3,
     section[data-testid="stSidebar"] h4 {
-        font-family: var(--ff-display) !important;
-        color: var(--cream) !important;
-        font-weight: 600 !important;
+        font-family: var(--ff-mono) !important;
+        font-size: 0.85rem !important;
+        letter-spacing: 0.14em !important;
+        text-transform: uppercase !important;
+        color: var(--teal) !important;
+        font-weight: 700 !important;
     }
     section[data-testid="stSidebar"] .stMarkdown p {
         font-size: 0.85rem;
         color: var(--muted-strong);
     }
 
-    /* Pulse Dot for System Operational Status */
-    @keyframes livePulse {
-        0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(58, 191, 178, 0.7); }
-        70% { transform: scale(1.05); box-shadow: 0 0 0 7px rgba(58, 191, 178, 0); }
-        100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(58, 191, 178, 0); }
-    }
-    .pulse-dot {
+    /* Static Status Indicator Dot */
+    .brand-status-dot {
         display: inline-block;
-        width: 7px;
-        height: 7px;
+        width: 6px;
+        height: 6px;
         border-radius: 50%;
         background: var(--teal);
-        animation: livePulse 2.2s infinite;
-        margin-right: 6px;
+        margin-right: 8px;
         vertical-align: middle;
     }
 
-    /* Brand Header Luxury Banner */
+    /* Hairline Divider Rule */
+    .brand-rule {
+        width: 44px;
+        height: 1.5px;
+        background: var(--teal);
+        margin: 12px 0 20px 0;
+    }
+    .brand-rule.coral { background: var(--coral); }
+    .brand-rule.lavender { background: var(--lavender); }
+
+    /* Executive Header Banner */
     .brand-header-card {
         position: relative;
-        background: linear-gradient(145deg, rgba(14, 28, 46, 0.85) 0%, rgba(8, 16, 28, 0.95) 100%);
-        border: 1px solid rgba(58, 191, 178, 0.22);
-        border-top: 1px solid rgba(122, 219, 211, 0.38);
-        border-radius: 8px;
-        padding: 1.85rem 2.2rem;
-        margin-bottom: 1.6rem;
-        box-shadow: 0 12px 36px -10px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.05);
-        backdrop-filter: blur(14px);
-        overflow: hidden;
+        background: var(--navy-mid);
+        border: 1px solid var(--border-hairline);
+        border-radius: 4px;
+        padding: 2rem 2.4rem;
+        margin-bottom: 1.5rem;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
     }
     .brand-top-accent {
         position: absolute;
         top: 0;
         left: 0;
         right: 0;
-        height: 3.5px;
-        background: linear-gradient(90deg, #070e17 0%, #3ABFB2 45%, #D9715A 100%);
+        height: 3px;
+        background: linear-gradient(90deg, #0A1628 0%, #3ABFB2 50%, #D9715A 100%);
     }
     .brand-header-flex {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        gap: 2rem;
+        gap: 2.5rem;
     }
     .brand-header-text {
         flex: 1;
     }
     .brand-logo-img {
-        width: 105px;
-        height: 105px;
+        width: 95px;
+        height: 95px;
         object-fit: contain;
-        filter: drop-shadow(0 6px 18px rgba(58, 191, 178, 0.3));
     }
     .brand-label-row {
         display: flex;
         align-items: center;
-        gap: 12px;
-        margin-bottom: 0.55rem;
+        gap: 14px;
+        margin-bottom: 0.65rem;
     }
     .brand-pill {
         font-family: var(--ff-mono);
-        font-size: 0.7rem;
+        font-size: 0.68rem;
         letter-spacing: 0.16em;
         text-transform: uppercase;
         color: var(--teal);
         font-weight: 700;
         display: inline-flex;
         align-items: center;
-        gap: 7px;
-        background: rgba(58, 191, 178, 0.08);
-        padding: 3px 10px;
-        border-radius: 3px;
-        border: 1px solid rgba(58, 191, 178, 0.2);
+        padding: 3px 8px;
+        border: 1px solid rgba(58, 191, 178, 0.25);
+        border-radius: 2px;
+        background: rgba(58, 191, 178, 0.05);
     }
     .brand-doc-code {
         font-family: var(--ff-mono);
-        font-size: 0.7rem;
+        font-size: 0.68rem;
         color: var(--muted);
-        letter-spacing: 0.12em;
-        padding-left: 6px;
+        letter-spacing: 0.14em;
     }
     .brand-hero-title {
         font-family: var(--ff-display);
-        font-size: 2.5rem;
+        font-size: 2.6rem;
         font-weight: 600;
         line-height: 1.1;
         color: var(--cream);
-        margin: 0 0 0.45rem 0;
-        text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+        margin: 0 0 0.5rem 0;
     }
     .brand-hero-subtitle {
         font-family: var(--ff-body);
         font-size: 0.95rem;
         font-weight: 300;
         color: var(--muted-strong);
-        line-height: 1.55;
-        margin: 0 0 1.1rem 0;
-        max-width: 900px;
+        line-height: 1.6;
+        margin: 0 0 1.2rem 0;
+        max-width: 920px;
     }
     .brand-meta-grid {
         display: flex;
         flex-wrap: wrap;
         gap: 2rem;
-        border-top: 1px solid rgba(58, 191, 178, 0.15);
-        padding-top: 0.95rem;
-        font-size: 0.8rem;
+        border-top: 1px solid var(--border-hairline);
+        padding-top: 1rem;
+        font-size: 0.78rem;
         color: var(--muted);
         font-family: var(--ff-mono);
-        letter-spacing: 0.03em;
+        letter-spacing: 0.04em;
     }
     .brand-meta-item strong {
         color: var(--teal);
         font-weight: 700;
     }
 
-    /* Luxury Container Cards */
+    /* Executive Containers */
     .brand-card {
-        background: linear-gradient(150deg, rgba(14, 28, 46, 0.75) 0%, rgba(8, 16, 28, 0.9) 100%);
-        border: 1px solid rgba(58, 191, 178, 0.16);
-        border-radius: 6px;
-        padding: 1.35rem 1.6rem;
+        background: var(--navy-mid);
+        border: 1px solid var(--border-hairline);
+        border-radius: 4px;
+        padding: 1.4rem 1.8rem;
         margin-bottom: 1.25rem;
-        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
-        backdrop-filter: blur(10px);
     }
-    .brand-card.teal-accent { border-left: 3.5px solid var(--teal); }
-    .brand-card.coral-accent { border-left: 3.5px solid var(--coral); }
-    .brand-card.lavender-accent { border-left: 3.5px solid var(--lavender); }
+    .brand-card.teal-accent { border-left: 3px solid var(--teal); }
+    .brand-card.coral-accent { border-left: 3px solid var(--coral); }
+    .brand-card.lavender-accent { border-left: 3px solid var(--lavender); }
 
-    /* Luxury KPI Metric Cards */
+    /* Executive KPI Cards */
     .brand-kpi-card {
-        background: linear-gradient(160deg, rgba(16, 32, 52, 0.85) 0%, rgba(9, 18, 30, 0.95) 100%);
-        border: 1px solid rgba(58, 191, 178, 0.18);
+        background: var(--navy-mid);
+        border: 1px solid var(--border-hairline);
         border-top: 3px solid var(--teal);
-        border-radius: 6px;
-        padding: 1.25rem 1.35rem;
+        border-radius: 4px;
+        padding: 1.35rem 1.45rem;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
         height: 100%;
-        box-shadow: 0 8px 26px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.04);
-        transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
-    }
-    .brand-kpi-card:hover {
-        transform: translateY(-2px);
-        border-color: rgba(58, 191, 178, 0.38);
-        box-shadow: 0 12px 34px rgba(0, 0, 0, 0.6), 0 0 18px rgba(58, 191, 178, 0.12);
+        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
     }
     .brand-kpi-card.coral-top { border-top-color: var(--coral); }
     .brand-kpi-card.lavender-top { border-top-color: var(--lavender); }
@@ -271,17 +261,16 @@ st.markdown(
 
     .brand-kpi-label {
         font-family: var(--ff-mono);
-        font-size: 0.68rem;
+        font-size: 0.67rem;
         letter-spacing: 0.16em;
         text-transform: uppercase;
         color: var(--teal-light);
-        margin-bottom: 0.45rem;
+        margin-bottom: 0.5rem;
         font-weight: 700;
-        opacity: 0.95;
     }
     .brand-kpi-val {
         font-family: var(--ff-display);
-        font-size: 2.15rem;
+        font-size: 2.25rem;
         font-weight: 600;
         color: var(--warm-white);
         line-height: 1.05;
@@ -289,46 +278,46 @@ st.markdown(
     }
     .brand-kpi-badge {
         font-family: var(--ff-mono);
-        font-size: 0.72rem;
+        font-size: 0.7rem;
         letter-spacing: 0.06em;
-        margin-top: 0.65rem;
-        padding: 3px 9px;
-        border-radius: 3px;
+        margin-top: 0.75rem;
+        padding: 2px 8px;
+        border-radius: 2px;
         width: fit-content;
     }
     .badge-teal {
-        background: rgba(58, 191, 178, 0.12);
+        background: rgba(58, 191, 178, 0.08);
         color: var(--teal-light);
-        border: 1px solid rgba(58, 191, 178, 0.32);
+        border: 1px solid rgba(58, 191, 178, 0.25);
     }
     .badge-coral {
-        background: rgba(217, 113, 90, 0.14);
+        background: rgba(217, 113, 90, 0.08);
         color: var(--coral-light);
-        border: 1px solid rgba(217, 113, 90, 0.35);
+        border: 1px solid rgba(217, 113, 90, 0.25);
     }
     .badge-lavender {
-        background: rgba(123, 125, 192, 0.14);
+        background: rgba(123, 125, 192, 0.08);
         color: var(--lavender-light);
-        border: 1px solid rgba(123, 125, 192, 0.35);
+        border: 1px solid rgba(123, 125, 192, 0.25);
     }
 
-    /* Insight Card */
+    /* Analytical Insight Boxes */
     .brand-insight-box {
-        background: rgba(14, 28, 46, 0.65);
-        border: 1px solid rgba(247, 243, 237, 0.08);
-        border-left: 3.5px solid var(--coral);
-        border-radius: 0 4px 4px 0;
-        padding: 1rem 1.3rem;
+        background: var(--navy-surface);
+        border: 1px solid var(--border-hairline);
+        border-left: 3px solid var(--coral);
+        border-radius: 0 3px 3px 0;
+        padding: 1.1rem 1.4rem;
         margin-bottom: 0.85rem;
     }
     .brand-insight-title {
         font-family: var(--ff-mono);
         font-size: 0.72rem;
-        letter-spacing: 0.12em;
+        letter-spacing: 0.14em;
         text-transform: uppercase;
         color: var(--coral-light);
         font-weight: 700;
-        margin-bottom: 0.25rem;
+        margin-bottom: 0.35rem;
     }
     .brand-insight-text {
         font-size: 0.85rem;
@@ -340,57 +329,48 @@ st.markdown(
     /* Section Subheadings */
     .brand-section-header {
         font-family: var(--ff-display);
-        font-size: 1.5rem;
+        font-size: 1.45rem;
         font-weight: 600;
         color: var(--cream);
-        margin-top: 0.85rem;
-        margin-bottom: 0.35rem;
-        display: flex;
-        align-items: center;
-        gap: 0.6rem;
+        margin-top: 0.8rem;
+        margin-bottom: 0.4rem;
     }
 
-    /* Luxury Segmented Tabs */
+    /* Segmented Editorial Tabs */
     .stTabs [data-baseweb="tab-list"] {
-        gap: 6px;
-        border-bottom: 1px solid rgba(58, 191, 178, 0.22) !important;
-        background: rgba(7, 14, 24, 0.6) !important;
-        padding: 5px 6px 0 6px !important;
-        border-radius: 6px 6px 0 0 !important;
+        gap: 8px;
+        border-bottom: 1px solid var(--border-hairline) !important;
+        background: transparent !important;
+        padding: 0 !important;
     }
     .stTabs [data-baseweb="tab"] {
         font-family: var(--ff-mono) !important;
-        font-size: 0.76rem !important;
-        letter-spacing: 0.1em !important;
+        font-size: 0.74rem !important;
+        letter-spacing: 0.12em !important;
         text-transform: uppercase !important;
         color: var(--muted) !important;
-        padding: 10px 18px !important;
-        border-radius: 4px 4px 0 0 !important;
+        padding: 10px 16px !important;
         background: transparent !important;
-        border: 1px solid transparent !important;
-        border-bottom: 2.5px solid transparent !important;
+        border: none !important;
+        border-bottom: 2px solid transparent !important;
         transition: all 0.2s ease !important;
     }
     .stTabs [data-baseweb="tab"]:hover {
         color: var(--teal-light) !important;
-        background: rgba(58, 191, 178, 0.05) !important;
     }
     .stTabs [aria-selected="true"] {
         color: var(--teal) !important;
-        border-bottom: 2.5px solid var(--teal) !important;
+        border-bottom: 2px solid var(--teal) !important;
         font-weight: 700 !important;
-        background: rgba(58, 191, 178, 0.1) !important;
-        border-top: 1px solid rgba(58, 191, 178, 0.25) !important;
-        border-left: 1px solid rgba(58, 191, 178, 0.25) !important;
-        border-right: 1px solid rgba(58, 191, 178, 0.25) !important;
+        background: transparent !important;
     }
 
     /* Form Fields & Dark Inputs */
     div[data-baseweb="select"] > div,
     div[data-baseweb="input"] > div {
-        background-color: #0c1828 !important;
-        border: 1px solid rgba(58, 191, 178, 0.25) !important;
-        border-radius: 4px !important;
+        background-color: #0E1C2E !important;
+        border: 1px solid rgba(58, 191, 178, 0.22) !important;
+        border-radius: 3px !important;
         color: var(--cream) !important;
     }
     div[data-baseweb="select"] > div:hover,
@@ -401,42 +381,39 @@ st.markdown(
     /* Primary Action Buttons */
     div.stButton > button[kind="primary"],
     div.stFormSubmitButton > button {
-        background: linear-gradient(135deg, #1E8C82 0%, #156d65 100%) !important;
+        background: #1E8C82 !important;
         color: var(--warm-white) !important;
         border: 1px solid #3ABFB2 !important;
         font-family: var(--ff-body) !important;
         font-weight: 600 !important;
         letter-spacing: 0.06em !important;
-        border-radius: 4px !important;
+        border-radius: 3px !important;
         padding: 0.6rem 1.4rem !important;
-        box-shadow: 0 4px 14px rgba(30, 140, 130, 0.35) !important;
-        transition: all 0.25s ease !important;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25) !important;
+        transition: all 0.2s ease !important;
     }
     div.stButton > button[kind="primary"]:hover,
     div.stFormSubmitButton > button:hover {
         background: var(--teal) !important;
         color: var(--navy) !important;
-        box-shadow: 0 6px 20px rgba(58, 191, 178, 0.45) !important;
-        transform: translateY(-1px) !important;
     }
 
     /* Formal Validation Seal */
     .brand-seal-box {
         margin-top: 2.8rem;
-        padding: 1.45rem 1.85rem;
-        background: linear-gradient(145deg, #091322 0%, #050a12 100%);
-        border: 1px solid rgba(58, 191, 178, 0.25);
-        border-radius: 6px;
+        padding: 1.5rem 2rem;
+        background: var(--navy-mid);
+        border: 1px solid var(--border-hairline);
+        border-radius: 4px;
         display: flex;
         justify-content: space-between;
         align-items: center;
         flex-wrap: wrap;
-        gap: 1.35rem;
-        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+        gap: 1.5rem;
     }
     .brand-seal-title {
         font-family: var(--ff-mono);
-        font-size: 0.8rem;
+        font-size: 0.78rem;
         letter-spacing: 0.16em;
         text-transform: uppercase;
         color: var(--teal);
@@ -451,7 +428,7 @@ st.markdown(
     .brand-seal-auth {
         text-align: right;
         font-family: var(--ff-mono);
-        font-size: 0.78rem;
+        font-size: 0.76rem;
         color: var(--coral-light);
         line-height: 1.45;
     }
@@ -485,7 +462,7 @@ st.markdown(
         <div class="brand-header-flex">
             <div class="brand-header-text">
                 <div class="brand-label-row">
-                    <span class="brand-pill"><span class="pulse-dot"></span>SISTEMA AUDITOR ACTIVO · QA/RA</span>
+                    <span class="brand-pill"><span class="brand-status-dot"></span>SISTEMA AUDITOR ACTIVO · QA/RA</span>
                     <span class="brand-doc-code">DICTAMEN TÉCNICO-LEGAL · AB-SUR-REG-2026-v2.2</span>
                 </div>
                 <h1 class="brand-hero-title">
@@ -500,7 +477,7 @@ st.markdown(
                     <div class="brand-meta-item"><strong>MARCO REGULATORIO:</strong> 21 CFR Part 211 / GMP Anexo 16 (Qualified Person)</div>
                     <div class="brand-meta-item"><strong>INVARIANTE SEMÁNTICO:</strong> Exact-Quote Substring Invariant (Zero-Hallucination)</div>
                     <div class="brand-meta-item"><strong>CONTRATOS DE DATOS:</strong> Esquemas Inmutables Pydantic v2</div>
-                    <div class="brand-meta-item"><strong>COMPENDIOS:</strong> Monografías Oficiales USP / Ph. Eur.</div>
+                    <div class="brand-meta-item"><strong>SEDE OPERACIONAL:</strong> Los Lagos, Chile · Puerto Montt &amp; Chiloé</div>
                 </div>
             </div>
             <div>
@@ -513,40 +490,42 @@ st.markdown(
 )
 
 # Onboarding & Purpose Guide for First-Time Visitors
-with st.expander("📌 ¿QUÉ ES ESTA PLATAFORMA Y CUÁL ES SU PROPÓSITO? (Guía de Auditoría para Primeros Visitantes)", expanded=True):
+with st.expander(
+    "GUÍA METODOLÓGICA & FUNDAMENTO OPERACIONAL DE AUDITORÍA REGULATORIA", expanded=False
+):
     st.markdown(
         """
         <div class="brand-card teal-accent" style="margin-bottom: 0;">
             <div style="font-family: var(--ff-mono); font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--teal); font-weight: 700; margin-bottom: 0.4rem;">
-                🎯 Propósito Estratégico & Problema Farmacéutico que Resuelve
+                Propósito Estratégico & Problema Farmacéutico que Resuelve
             </div>
             <p style="font-size: 0.88rem; color: var(--muted-strong); line-height: 1.6; margin: 0;">
-                En la industria biofarmacéutica y de ingredientes activos (APIs), la liberación de un lote al mercado exige verificar
-                que cada parámetro del Certificado de Análisis (CoA) cumpla rigurosamente con los límites de la Farmacopea Oficial (USP / Ph. Eur.).
+                En la manufactura de principios activos farmacéuticos (APIs) y biomedicamentos, cada lote exige verificar
+                que todos los parámetros del Certificado de Análisis (CoA) cumplan rigurosamente con los límites de la Farmacopea Oficial (USP / Ph. Eur.).
                 Los LLMs convencionales son peligrosos en este entorno porque sufren de <strong>alucinaciones numéricas</strong> e inventan citas textuales.<br><br>
-                <strong>ReguTech-AI Auditor</strong> resuelve esto mediante una arquitectura determinista de circuito cerrado:
-                aplica el <strong>Invariante de Subcadena Exacta</strong> (comprobación criptográfica/literal de que cada cita existe en el documento fuente)
-                y verificación matemática determinista de límites. El sistema actúa como un <strong>co-piloto infalible para el Qualified Person (QP)</strong>,
+                <strong>ReguTech-AI Auditor</strong> resuelve esta fricción mediante una arquitectura determinista de circuito cerrado:
+                aplica el <strong>Invariante de Subcadena Exacta</strong> (comprobación literal de que cada cita existe en el documento fuente)
+                y verificación matemática determinista de límites. El sistema actúa como un <strong>co-piloto para el Qualified Person (QP)</strong>,
                 garantizando liberación de lotes en segundos con trazabilidad 100% auditable.
             </p>
             <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 1.15rem;">
-                <div style="background: rgba(10, 20, 34, 0.7); border: 1px solid rgba(58, 191, 178, 0.16); border-radius: 4px; padding: 0.95rem 1.1rem; font-size: 0.83rem; color: var(--muted-strong); line-height: 1.45;">
-                    <strong style="font-family: var(--ff-mono); color: var(--coral-light); display: block; margin-bottom: 0.35rem; font-size: 0.76rem; letter-spacing: 0.05em; text-transform: uppercase;">
+                <div style="background: var(--navy-surface); border: 1px solid var(--border-hairline); border-radius: 3px; padding: 1rem 1.15rem; font-size: 0.83rem; color: var(--muted-strong); line-height: 1.45;">
+                    <strong style="font-family: var(--ff-mono); color: var(--coral-light); display: block; margin-bottom: 0.35rem; font-size: 0.74rem; letter-spacing: 0.08em; text-transform: uppercase;">
                         1. Selección de Monografía
                     </strong>
                     En el panel lateral izquierdo, selecciona el estándar farmacopeico oficial (ej. Insulina Humana Recombinante USP o Trehalosa Ph. Eur.).
                 </div>
-                <div style="background: rgba(10, 20, 34, 0.7); border: 1px solid rgba(58, 191, 178, 0.16); border-radius: 4px; padding: 0.95rem 1.1rem; font-size: 0.83rem; color: var(--muted-strong); line-height: 1.45;">
-                    <strong style="font-family: var(--ff-mono); color: var(--teal-light); display: block; margin-bottom: 0.35rem; font-size: 0.76rem; letter-spacing: 0.05em; text-transform: uppercase;">
+                <div style="background: var(--navy-surface); border: 1px solid var(--border-hairline); border-radius: 3px; padding: 1rem 1.15rem; font-size: 0.83rem; color: var(--muted-strong); line-height: 1.45;">
+                    <strong style="font-family: var(--ff-mono); color: var(--teal-light); display: block; margin-bottom: 0.35rem; font-size: 0.74rem; letter-spacing: 0.08em; text-transform: uppercase;">
                         2. Ingesta de Lote (CoA)
                     </strong>
                     Selecciona un lote conforme de referencia, un lote con contaminación crítica, o prueba el modo adversarial con citas falsificadas.
                 </div>
-                <div style="background: rgba(10, 20, 34, 0.7); border: 1px solid rgba(58, 191, 178, 0.16); border-radius: 4px; padding: 0.95rem 1.1rem; font-size: 0.83rem; color: var(--muted-strong); line-height: 1.45;">
-                    <strong style="font-family: var(--ff-mono); color: var(--lavender-light); display: block; margin-bottom: 0.35rem; font-size: 0.76rem; letter-spacing: 0.05em; text-transform: uppercase;">
+                <div style="background: var(--navy-surface); border: 1px solid var(--border-hairline); border-radius: 3px; padding: 1rem 1.15rem; font-size: 0.83rem; color: var(--muted-strong); line-height: 1.45;">
+                    <strong style="font-family: var(--ff-mono); color: var(--lavender-light); display: block; margin-bottom: 0.35rem; font-size: 0.74rem; letter-spacing: 0.08em; text-transform: uppercase;">
                         3. Veredicto & Trazabilidad
                     </strong>
-                    Revisa la disposición formal del lote (APROBADO / RECHAZADO / OBSERVADO), inspecciona la cita literal resaltada en el texto original y descarga el dossier.
+                    Revisa la disposición formal del lote (APROBADO / RECHAZADO / OBSERVADO), inspecciona la cita literal verificada en el texto original y descarga el dossier.
                 </div>
             </div>
         </div>
@@ -555,7 +534,7 @@ with st.expander("📌 ¿QUÉ ES ESTA PLATAFORMA Y CUÁL ES SU PROPÓSITO? (Guí
     )
 
 # Sidebar controls
-st.sidebar.markdown("### ⚙️ Configuración de Auditoría")
+st.sidebar.markdown("### CONFIGURACIÓN DE AUDITORÍA")
 
 monograph_choice = st.sidebar.selectbox(
     "Monografía Farmacopeica Objetivo",
@@ -577,18 +556,18 @@ input_source = st.sidebar.radio(
 
 if input_source == "Benchmark: Batch INS-2026-X88 (Conforming)":
     st.sidebar.info(
-        "💡 **Caso Conforme:** Simula un lote real de Insulina Humana Recombinante donde todos los parámetros "
-        "cumplen estrictamente la monografía USP. Veredicto esperado: **APROBADO**."
+        "Caso Conforme: Simula un lote real de Insulina Humana Recombinante donde todos los parámetros "
+        "cumplen estrictamente la monografía USP. Veredicto esperado: APROBADO."
     )
 elif input_source == "Benchmark: Batch INS-2026-FAIL04 (Critical Contamination)":
     st.sidebar.error(
-        "🚨 **Caso Rechazo Crítico:** Lote contaminado con endotoxinas bacterianas (> 10.0 EU/mg) y agregados "
-        "proteicos (HMWP). Veredicto esperado: **RECHAZADO (Cuarentena Inmediata)**."
+        "Caso Rechazo Crítico: Lote contaminado con endotoxinas bacterianas (> 10.0 EU/mg) y agregados "
+        "proteicos (HMWP). Veredicto esperado: RECHAZADO (Cuarentena Inmediata)."
     )
 elif input_source == "Adversarial: Injected Rogue Hallucination Quote":
     st.sidebar.warning(
-        "🛡️ **Ataque Adversarial:** Simula una IA que inventa una lectura o cita inexistente en el CoA original. "
-        "El motor la marca como **No Verificada** y bloquea la liberación automática."
+        "Ataque Adversarial: Simula una extracción donde la IA genera una lectura o cita inexistente en el CoA fuente. "
+        "El motor la marca como No Verificada y bloquea la liberación automática."
     )
 
 strict_invariant = st.sidebar.toggle("Invariante Estricto de Subcadena", value=True)
@@ -753,12 +732,12 @@ with col5:
 st.markdown("<div style='height: 0.6rem;'></div>", unsafe_allow_html=True)
 
 # Explanatory breakdown of KPIs
-with st.expander("💡 ¿CÓMO INTERPRETAR ESTOS 5 RESULTADOS REGULATORIOS?", expanded=False):
+with st.expander("CRITERIOS DE AUDITORÍA Y LIBERACIÓN REGULATORIA (GMP ANEXO 16)", expanded=False):
     st.markdown(
         """
         <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin-top: 0.25rem;">
             <div class="brand-insight-box">
-                <div class="brand-insight-title">📋 Disposición de Lote (Batch Verdict):</div>
+                <div class="brand-insight-title">Disposición de Lote (Batch Verdict):</div>
                 <p class="brand-insight-text">
                     Dictamen formal de calidad conforme a GMP Anexo 16. <strong>APROBADO</strong> autoriza la salida a distribución comercial.
                     <strong>RECHAZADO</strong> exige cuarentena inmediata por incumplimiento de Atributos Críticos de Calidad (CQA).
@@ -766,23 +745,23 @@ with st.expander("💡 ¿CÓMO INTERPRETAR ESTOS 5 RESULTADOS REGULATORIOS?", ex
                 </p>
             </div>
             <div class="brand-insight-box" style="border-left-color: var(--teal);">
-                <div class="brand-insight-title" style="color: var(--teal-light);">📊 Índice de Cumplimiento (%):</div>
+                <div class="brand-insight-title" style="color: var(--teal-light);">Índice de Cumplimiento (%):</div>
                 <p class="brand-insight-text">
                     Puntuación normalizada de adhesión al compendio oficial, ponderando con mayor peso los ensayos críticos (endotoxinas, bioburden, impurezas relacionadas)
                     respecto a características organolépticas generales.
                 </p>
             </div>
             <div class="brand-insight-box" style="border-left-color: var(--lavender);">
-                <div class="brand-insight-title" style="color: var(--lavender-light);">⚠️ Alertas Preventivas (Early-Warning &ge; 85%):</div>
+                <div class="brand-insight-title" style="color: var(--lavender-light);">Alertas Preventivas (Early-Warning &ge; 85%):</div>
                 <p class="brand-insight-text">
                     Mide parámetros que, aunque todavía están dentro del límite legal, alcanzaron más del 85% del valor máximo admisible.
                     Esto previene fallas futuras identificando tendencias de deriva en el proceso de fermentación o purificación.
                 </p>
             </div>
             <div class="brand-insight-box" style="border-left-color: var(--coral);">
-                <div class="brand-insight-title">🛡️ No Verificados (Violación de Invariante):</div>
+                <div class="brand-insight-title">Invariante Cero-Alucinación (Cita Literal):</div>
                 <p class="brand-insight-text">
-                    Si un modelo de IA intentara extraer una lectura inventada o alucinada que no existe textualmente en el certificado original,
+                    Si un modelo de IA intentara extraer una lectura o cita inexistente en el certificado original,
                     el sistema la marca inmediatamente como 'No Verificado' y bloquea la liberación automática del lote.
                 </p>
             </div>
@@ -794,26 +773,26 @@ with st.expander("💡 ¿CÓMO INTERPRETAR ESTOS 5 RESULTADOS REGULATORIOS?", ex
 st.markdown("<div style='height: 0.5rem;'></div>", unsafe_allow_html=True)
 
 if report.verdict == OverallVerdict.APPROVED:
-    st.success(f"✅ **LIBERACIÓN DE LOTE AUTORIZADA:** El lote `{report.batch_id}` cumple estrictamente con todas las especificaciones de la monografía.")
+    st.success(f"**LIBERACIÓN DE LOTE AUTORIZADA:** El lote `{report.batch_id}` cumple estrictamente con todas las especificaciones de la monografía.")
 elif report.verdict == OverallVerdict.REJECTED:
-    st.error(f"🚨 **LIBERACIÓN DE LOTE RECHAZADA:** El lote `{report.batch_id}` incumple Atributos Críticos de Calidad (CQA). Cuarentena inmediata obligatoria.")
+    st.error(f"**LIBERACIÓN DE LOTE RECHAZADA:** El lote `{report.batch_id}` incumple Atributos Críticos de Calidad (CQA). Cuarentena inmediata obligatoria.")
 else:
-    st.warning(f"⚠️ **MARCADO PARA INVESTIGACIÓN DE CALIDAD:** El lote `{report.batch_id}` requiere investigación de desvíos por el Qualified Person (QP).")
+    st.warning(f"**MARCADO PARA INVESTIGACIÓN DE CALIDAD:** El lote `{report.batch_id}` requiere investigación de desvíos por el Qualified Person (QP).")
 
 # Main Audit Views
 tab1, tab2, tab3, tab4 = st.tabs([
-    "📋 Matriz de Ensayos y Desvíos",
-    "🔍 Trazabilidad Cero-Alucinación (Subcadena)",
-    "📄 Dossier de Liberación Formal (LIMS / ERP)",
-    "📜 Fundamentos GMP, Validación FDA & Cero-Alucinación",
+    "I. Matriz de Ensayos y Desvíos Farmacopeicos",
+    "II. Trazabilidad de Evidencia Textual Cero-Alucinación",
+    "III. Exportación de Dossier de Calidad (LIMS / ERP)",
+    "IV. Fundamentos GMP, Validación FDA & Cero-Alucinación",
 ])
 
 with tab1:
     st.markdown(
         """
         <div class="brand-card teal-accent" style="margin-bottom: 1.25rem;">
-            <strong style="color: var(--teal); font-family: var(--ff-mono); font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase;">
-                📖 ¿Cómo leer esta Matriz de Auditoría?
+            <strong style="color: var(--teal); font-family: var(--ff-mono); font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase;">
+                Interpretación de la Matriz de Ensayos Analíticos
             </strong>
             <p style="color: var(--muted-strong); font-size: 0.85rem; margin-top: 0.35rem; line-height: 1.5;">
                 Cada fila representa un ensayo analítico oficial. La columna <strong>Desviación</strong> calcula en tiempo real el porcentaje
@@ -847,7 +826,7 @@ with tab1:
             "Límite Monografía": f.specification_summary,
             "Desviación": dev_str,
             "Atributo Crítico (CQA)": "Sí" if f.is_critical else "No",
-            "Cita Verificada": "✅ Verificado" if f.quote_verified else "❌ No Verificado",
+            "Cita Verificada": "Verificado" if f.quote_verified else "No Verificado",
             "Justificación Técnica": f.rationale,
         })
 
@@ -862,14 +841,14 @@ with tab2:
     st.markdown(
         """
         <div class="brand-card lavender-accent" style="margin-bottom: 1.25rem;">
-            <strong style="color: var(--lavender-light); font-family: var(--ff-mono); font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase;">
-                📖 ¿Qué significa esta Vista de Doble Pantalla?
+            <strong style="color: var(--lavender-light); font-family: var(--ff-mono); font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase;">
+                Verificación Cero-Alucinación en Circuito Cerrado
             </strong>
             <p style="color: var(--muted-strong); font-size: 0.85rem; margin-top: 0.35rem; line-height: 1.5;">
                 A la izquierda, seleccionas cualquier parámetro analizado. A la derecha, el visor localiza y
                 <strong>resalta exactamente la cita textual literal</strong> encontrada dentro del documento original ingerido.<br>
-                Si alguien intenta falsificar o adulterar una lectura, el <strong>Invariante de Subcadena</strong> detecta que el texto
-                no coincide carácter por carácter y marca la cita con alerta roja de seguridad.
+                Si se presentara una lectura adulterada o alucinada, el <strong>Invariante de Subcadena</strong> detecta que el texto
+                no coincide carácter por carácter y marca la cita con alerta de seguridad.
             </p>
         </div>
         """,
@@ -893,16 +872,16 @@ with tab2:
         st.code(selected_finding.evidence_quote, language="text")
 
         if selected_finding.quote_verified:
-            st.success("✅ **Invariante Cumplido:** Cita verificada como subcadena literal exacta del documento ingerido.")
+            st.success("**Invariante Cumplido:** Cita verificada como subcadena literal exacta del documento ingerido.")
         else:
-            st.error("🚨 **Violación de Invariante:** La cita NO se encuentra de forma idéntica en el texto del documento fuente.")
+            st.error("**Violación de Invariante:** La cita NO se encuentra de forma idéntica en el texto del documento fuente.")
 
     with col_right:
         st.markdown(f"**Documento Fuente:** `{dossier.filename}`")
         raw_text = dossier.full_text
         quote = selected_finding.evidence_quote
         if quote and quote in raw_text:
-            highlighted = raw_text.replace(quote, f"👉 【 {quote} 】 👈")
+            highlighted = raw_text.replace(quote, f"[EVIDENCIA LITERAL VERIFICADA: {quote}]")
             st.text_area("Contenido Ingerido (con cita resaltada):", highlighted, height=350)
         else:
             st.text_area("Contenido Ingerido:", raw_text, height=350)
@@ -911,9 +890,9 @@ with tab3:
     st.markdown('<div class="brand-section-header">Exportación de Dossier de Calidad y Cumplimiento</div>', unsafe_allow_html=True)
     st.markdown(
         """
-        <div class="brand-card" style="border-left: 3.5px solid var(--steel); margin-bottom: 1.25rem;">
-            <strong style="color: var(--steel); font-family: var(--ff-mono); font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase;">
-                📖 Propósito de Integración con Sistemas Regulados (21 CFR Part 11):
+        <div class="brand-card" style="border-left: 3px solid var(--steel); margin-bottom: 1.25rem;">
+            <strong style="color: var(--steel); font-family: var(--ff-mono); font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase;">
+                Integración con Sistemas Regulados (21 CFR Part 11)
             </strong>
             <p style="color: var(--muted-strong); font-size: 0.85rem; margin-top: 0.35rem; line-height: 1.5;">
                 Permite exportar el dictamen formal en formatos auditables para archivado permanente en el dossier de liberación de la planta:<br>
@@ -927,7 +906,7 @@ with tab3:
 
     json_dossier = report.model_dump_json(indent=2)
     st.download_button(
-        label="📥 Descargar Dossier Formal de Auditoría (JSON / LIMS)",
+        label="Descargar Dossier Formal de Auditoría (JSON / LIMS)",
         data=json_dossier,
         file_name=f"audit_{report.batch_id}.json",
         mime="application/json",
@@ -954,7 +933,7 @@ with tab3:
     )
     st.text_area("Vista Previa del Resumen Técnico (Markdown):", md_summary, height=200)
     st.download_button(
-        label="📥 Descargar Resumen de Liberación (Markdown)",
+        label="Descargar Resumen de Liberación (Markdown)",
         data=md_summary,
         file_name=f"release_summary_{report.batch_id}.md",
         mime="text/markdown",
@@ -1018,13 +997,13 @@ st.markdown(
             <div class="brand-seal-title">CERTIFICACIÓN DE INTEGRIDAD REGULATORIA GMP & CERO-ALUCINACIÓN</div>
             <div class="brand-seal-desc">
                 Sistema auditado bajo estándares de validación de software computarizado (GAMP 5 / 21 CFR Part 11).<br>
-                Invariante de subcadena exacto • Detección determinista de límites farmacopeicos • Código: AB-SUR-REG-2026.
+                Invariante de subcadena exacto • Detección determinista de límites farmacopeicos • Código: AB-SUR-REG-2026-v2.2.
             </div>
         </div>
         <div class="brand-seal-auth">
             <strong>AquaBiotics Sur · QA/RA</strong>
-            Aseguramiento de Calidad &amp; Cumplimiento<br>
-            Liberación Determinista de Lotes
+            Dirección de Calidad &amp; Asuntos Regulatorios<br>
+            Sede Puerto Montt &amp; Chiloé · Región de Los Lagos, Chile
         </div>
     </div>
     """,
