@@ -618,7 +618,7 @@ with tab1:
 
     if findings_data:
         df_findings = pd.DataFrame(findings_data)
-        st.dataframe(df_findings, use_container_width=True, hide_index=True)
+        st.dataframe(df_findings, width="stretch", hide_index=True)
     else:
         st.info("No hay parámetros que coincidan con el filtro seleccionado.")
 
