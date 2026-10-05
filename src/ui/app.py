@@ -345,6 +345,22 @@ input_source = st.sidebar.radio(
     ],
 )
 
+if input_source == "Benchmark: Batch INS-2026-X88 (Conforming)":
+    st.sidebar.info(
+        "💡 **Caso Conforme:** Simula un lote real de Insulina Humana Recombinante donde todos los parámetros "
+        "cumplen estrictamente la monografía USP. Veredicto esperado: **APROBADO**."
+    )
+elif input_source == "Benchmark: Batch INS-2026-FAIL04 (Critical Contamination)":
+    st.sidebar.error(
+        "🚨 **Caso Rechazo Crítico:** Lote contaminado con endotoxinas bacterianas (> 10.0 EU/mg) y agregados "
+        "proteicos (HMWP). Veredicto esperado: **RECHAZADO (Cuarentena Inmediata)**."
+    )
+elif input_source == "Adversarial: Injected Rogue Hallucination Quote":
+    st.sidebar.warning(
+        "🛡️ **Ataque Adversarial:** Simula una IA que inventa una lectura o cita inexistente en el CoA original. "
+        "El motor la marca como **No Verificada** y bloquea la liberación automática."
+    )
+
 strict_invariant = st.sidebar.toggle("Invariante Estricto de Subcadena", value=True)
 warning_ratio = st.sidebar.slider(
     "Umbral de Alerta Temprana Preventiva",
@@ -552,10 +568,11 @@ else:
     st.warning(f"⚠️ **MARCADO PARA INVESTIGACIÓN DE CALIDAD:** El lote `{report.batch_id}` requiere investigación de desvíos por el Qualified Person (QP).")
 
 # Main Audit Views
-tab1, tab2, tab3 = st.tabs([
+tab1, tab2, tab3, tab4 = st.tabs([
     "📋 Matriz de Ensayos y Desvíos",
     "🔍 Trazabilidad Cero-Alucinación (Subcadena)",
     "📄 Dossier de Liberación Formal (LIMS / ERP)",
+    "📜 Fundamentos GMP, Validación FDA & Cero-Alucinación",
 ])
 
 with tab1:
@@ -704,6 +721,47 @@ with tab3:
         mime="text/markdown",
         use_container_width=True,
     )
+
+with tab4:
+    st.markdown('<div class="exec-section-heading">Fundamentos GMP, Validación de Software & Arquitectura Cero-Alucinación</div>', unsafe_allow_html=True)
+    st.markdown(
+        r"""
+        ### 1. El Problema Crítico de la Industria Biofarmacéutica
+        En la manufactura de principios activos farmacéuticos (APIs) y biomedicamentos (insulinas, anticuerpos monoclonales, vacunas),
+        cada lote producido debe pasar por un proceso legal de **Liberación de Lote (Batch Release)** antes de salir al mercado.
+        Este proceso está estrictamente regulado por la FDA (**21 CFR Part 211**) y la EMA (**GMP Anexo 16**).
+
+        Actualmente, un **Qualified Person (QP)** o Director Técnico debe revisar manualmente los Certificados de Análisis (CoA)
+        comparando decenas de ensayos fisicoquímicos, biológicos y microbiológicos contra las especificaciones oficiales de la
+        Farmacopea de los Estados Unidos (**USP**) o Europea (**Ph. Eur.**).
+        Este proceso manual toma días, es costoso y genera cuellos de botella millonarios en la cadena de suministro.
+
+        ### 2. Por qué los LLMs Convencionales Fracasan en Entornos Regulados
+        Las empresas biotecnológicas han intentado automatizar esta tarea usando LLMs comerciales (como ChatGPT o Claude directo),
+        pero se han encontrado con un impedimento insalvable: **las alucinaciones estocásticas**.
+        - **Alucinaciones Numéricas:** Un LLM puede confundir un límite de endotoxinas bacterianas de `≤ 10.0 EU/mg` con `10.5 EU/mg` y declarar erróneamente que "pasa".
+        - **Citas Falsificadas:** Los LLMs tienden a parafrasear o inventar citas cuando no encuentran el dato exacto.
+        - **Violación de 21 CFR Part 11:** La FDA exige que cualquier software computarizado utilizado en control de calidad farmacéutico sea **determinista, reproducible y auditable**. Los modelos probabilísticos no restringidos no pueden ser validados bajo estándares GAMP 5.
+
+        ### 3. La Arquitectura Cero-Alucinación de ReguTech-AI Auditor
+        ReguTech-AI Auditor resuelve este dilema separando la extracción de la verificación mediante un circuito cerrado de 4 capas:
+        1. **Invariante de Subcadena Exacta (Exact-Quote Substring Invariant):**
+           Cada lectura o métrica extraída debe ir acompañada de una cita textual literal. El motor verifica criptográficamente que dicha cita exista carácter por carácter dentro del texto crudo del documento original. Si la IA inventa una cita, el sistema la rechaza de inmediato (`UNVERIFIED_SOURCE`).
+        2. **Verificación Matemática Determinista de Cotas:**
+           La comparación contra los límites farmacopeicos nunca se delega al LLM. La ejecuta un motor determinista en Python con validación de tipos Pydantic v2, evaluando operadores matemáticos estrictos (`<`, `≤`, `>`, `≥`, `between`).
+        3. **Sistema de Alerta Temprana Preventiva (Early-Warning ≥ 85%):**
+           El software no solo detecta lotes rechazados; alerta a los ingenieros de calidad cuando un parámetro analítico alcanza el 85% del límite superior permitido. Esto permite corregir derivas en el biorreactor o en las columnas de cromatografía antes de que se produzca una pérdida millonaria de lote.
+        4. **Dossier Digital Inmutable para LIMS / ERP:**
+           Genera un contrato de datos Pydantic v2 tipado y serializable, con hash de integridad y marca de tiempo UTC, listo para integrarse directamente con sistemas LIMS, SAP y software de firma electrónica calificada.
+
+        ### 4. Preguntas Frecuentes para Directores de Calidad (QA) y Qualified Persons (QP)
+        - **¿Puede este sistema aprobar por error un lote contaminado?**
+          No. Si un solo Atributo Crítico de Calidad (CQA) como endotoxinas bacterianas, bioburden o impurezas de alto peso molecular (HMWP) excede el límite de la monografía, el sistema bloquea inmediatamente la liberación y emite un veredicto mandatorio de **RECHAZADO (Cuarentena Inmediata)**.
+        - **¿Cómo se valida este software frente a una inspección de la FDA?**
+          El software cuenta con una suite completa de pruebas unitarias automatizadas (Pytest) con cobertura del 100% en las reglas de decisión, trazabilidad determinista de citas y esquemas de datos Pydantic v2 inmutables, cumpliendo los principios de integridad de datos ALCOA+ (Atribuible, Legible, Contemporáneo, Original y Exacto).
+        """
+    )
+
 
 # Formal Institutional Validation Seal (Skill Directive)
 st.markdown(
