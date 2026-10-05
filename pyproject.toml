@@ -1,0 +1,73 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "regutech-ai-auditor"
+version = "0.1.0"
+description = "Deterministic zero-hallucination regulatory auditor for Certificates of Analysis (CoA) and pharmacopeia standards."
+readme = "README.md"
+requires-python = ">=3.11"
+authors = [
+    { name = "Byron Calderón González", email = "byroncalde@gmail.com" }
+]
+keywords = [
+    "regulatory-ai",
+    "bioprocess",
+    "quality-control",
+    "pharmacopeia",
+    "gmp",
+    "coa-audit",
+    "deterministic-rag",
+    "pydantic"
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Science/Research",
+    "Topic :: Scientific/Engineering :: Bio-Informatics",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+dependencies = [
+    "pydantic>=2.7.0",
+    "streamlit>=1.35.0",
+    "pandas>=2.2.0",
+    "pypdf>=4.2.0",
+    "pdfplumber>=0.11.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.2.0",
+    "ruff>=0.4.0",
+    "mypy>=1.10.0",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "UP"]
+ignore = ["E501"]
+
+[tool.mypy]
+python_version = "3.11"
+plugins = ["pydantic.mypy"]
+ignore_missing_imports = true
+warn_unused_configs = true
+disallow_untyped_defs = false
+check_untyped_defs = true
+
+[[tool.mypy.overrides]]
+module = ["streamlit.*", "pypdf.*", "pdfplumber.*", "pandas.*"]
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+addopts = "-v --strict-markers"
