@@ -7,7 +7,6 @@ Design Standard: AquaBiotics Sur Corporate Brand Identity · Executive Editorial
 import base64
 from pathlib import Path
 from typing import Any
-import pandas as pd
 import streamlit as st
 
 from src.data.monographs import (
@@ -75,9 +74,15 @@ st.markdown(
         --ff-mono: 'Space Mono', monospace;
     }
 
-    /* Core Canvas - Solid Oceanic Navy, Zero Artificial Glows */
+    /* Viewport Ergonomics & Clean Shell */
     #MainMenu, footer { visibility: hidden !important; }
     header[data-testid="stHeader"] { background: transparent !important; }
+
+    .block-container {
+        padding-top: 1.5rem !important;
+        padding-bottom: 2.5rem !important;
+        max-width: 1320px !important;
+    }
 
     .stApp {
         background-color: var(--navy);
@@ -365,17 +370,61 @@ st.markdown(
         background: transparent !important;
     }
 
-    /* Form Fields & Dark Inputs */
-    div[data-baseweb="select"] > div,
-    div[data-baseweb="input"] > div {
+    /* Executive Streamlit Slider Overrides */
+    div[data-testid="stSlider"] div[role="slider"] {
+        background-color: var(--teal) !important;
+        border: 2px solid var(--warm-white) !important;
+        box-shadow: 0 0 10px rgba(58, 191, 178, 0.4) !important;
+        width: 16px !important;
+        height: 16px !important;
+    }
+    div[data-testid="stSlider"] div[data-testid="stSliderTrack"] > div {
+        background: linear-gradient(90deg, #1E8C82 0%, #3ABFB2 100%) !important;
+    }
+    div[data-testid="stSlider"] label {
+        font-family: var(--ff-mono) !important;
+        font-size: 0.74rem !important;
+        letter-spacing: 0.12em !important;
+        text-transform: uppercase !important;
+        color: var(--cream) !important;
+    }
+
+    /* Executive Selectbox & Form Field Overrides */
+    div[data-testid="stSelectbox"] label,
+    div[data-testid="stRadio"] label {
+        font-family: var(--ff-mono) !important;
+        font-size: 0.72rem !important;
+        letter-spacing: 0.1em !important;
+        text-transform: uppercase !important;
+        color: var(--muted-strong) !important;
+    }
+    div[data-baseweb="select"] > div {
         background-color: #0E1C2E !important;
         border: 1px solid rgba(58, 191, 178, 0.22) !important;
         border-radius: 3px !important;
         color: var(--cream) !important;
     }
-    div[data-baseweb="select"] > div:hover,
-    div[data-baseweb="input"] > div:hover {
+    div[data-baseweb="select"] > div:hover {
         border-color: var(--teal) !important;
+    }
+
+    /* Executive Expander Styling */
+    div[data-testid="stExpander"] {
+        background: var(--navy-mid) !important;
+        border: 1px solid var(--border-hairline) !important;
+        border-radius: 4px !important;
+        margin-bottom: 1rem !important;
+    }
+    div[data-testid="stExpander"] summary {
+        font-family: var(--ff-mono) !important;
+        font-size: 0.76rem !important;
+        letter-spacing: 0.12em !important;
+        text-transform: uppercase !important;
+        color: var(--teal) !important;
+        padding: 0.75rem 1rem !important;
+    }
+    div[data-testid="stExpander"] summary:hover {
+        color: var(--teal-light) !important;
     }
 
     /* Primary Action Buttons */
@@ -396,6 +445,73 @@ st.markdown(
     div.stFormSubmitButton > button:hover {
         background: var(--teal) !important;
         color: var(--navy) !important;
+    }
+
+    /* Booktabs Table System (Nature / Academic Memorandum Standard) */
+    .booktabs-table-wrapper {
+        overflow-x: auto;
+        margin: 1.2rem 0;
+        border-radius: 4px;
+        background: var(--navy-mid);
+        border: 1px solid var(--border-hairline);
+    }
+    table.booktabs {
+        width: 100%;
+        border-collapse: collapse;
+        font-family: var(--ff-body);
+        font-size: 0.86rem;
+        color: var(--cream);
+        text-align: left;
+    }
+    table.booktabs th {
+        font-family: var(--ff-mono);
+        font-size: 0.72rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--teal);
+        padding: 11px 14px;
+        border-top: 2px solid var(--teal);
+        border-bottom: 1.2px solid rgba(58, 191, 178, 0.4);
+        background: rgba(14, 28, 46, 0.75);
+        font-weight: 700;
+    }
+    table.booktabs td {
+        padding: 10px 14px;
+        border-bottom: 1px solid rgba(247, 243, 237, 0.05);
+        vertical-align: middle;
+        color: var(--muted-strong);
+    }
+    table.booktabs tr:nth-child(even) td {
+        background: rgba(255, 255, 255, 0.015);
+    }
+    table.booktabs tr:hover td {
+        background: rgba(58, 191, 178, 0.04);
+    }
+
+    .status-badge {
+        display: inline-block;
+        font-family: var(--ff-mono);
+        font-size: 0.68rem;
+        padding: 2px 7px;
+        border-radius: 2px;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+    }
+
+    /* Terminal Code Container */
+    .code-container {
+        background: #070e17;
+        border: 1px solid var(--border-hairline);
+        border-radius: 4px;
+        padding: 1rem 1.2rem;
+        font-family: var(--ff-mono);
+        font-size: 0.78rem;
+        color: var(--teal-light);
+        max-height: 380px;
+        overflow-y: auto;
+        white-space: pre-wrap;
+        line-height: 1.5;
+        margin-bottom: 1rem;
     }
 
     /* Formal Validation Seal */
@@ -442,6 +558,85 @@ st.markdown(
     """,
     unsafe_allow_html=True,
 )
+
+
+def render_regutech_booktabs_table(findings: list[Any], filter_choice: str) -> str:
+    """Renders a GMP compliant Booktabs audit findings table."""
+    rows_html = []
+    for f in findings:
+        if filter_choice == "Fallas Críticas y Alertas Solamente" and f.status == FindingStatus.PASS:
+            continue
+        if filter_choice == "Ensayos Conformes Solamente" and f.status != FindingStatus.PASS:
+            continue
+
+        dev_str = (
+            f"+{f.deviation_percent}%"
+            if f.deviation_percent and f.deviation_percent > 0
+            else (f"{f.deviation_percent}%" if f.deviation_percent else "0.0%")
+        )
+
+        if f.status == FindingStatus.PASS:
+            badge_html = '<span class="status-badge badge-teal">CONFORME</span>'
+        elif f.status == FindingStatus.FAIL:
+            badge_html = '<span class="status-badge badge-coral">NO CONFORME (OOS)</span>'
+        else:
+            badge_html = '<span class="status-badge badge-lavender">ALERTA PREVENTIVA</span>'
+
+        cqa_html = (
+            '<span style="font-family: var(--ff-mono); color: #D9715A; font-weight: 700;">SÍ</span>'
+            if f.is_critical
+            else '<span style="font-family: var(--ff-mono); color: var(--muted);">NO</span>'
+        )
+        quote_html = (
+            '<span style="font-family: var(--ff-mono); color: #3ABFB2; font-weight: 700;">VERIFICADO</span>'
+            if f.quote_verified
+            else '<span style="font-family: var(--ff-mono); color: #D9715A; font-weight: 700;">FALLA INVARIANTE</span>'
+        )
+
+        rows_html.append(
+            f"""
+            <tr>
+                <td>{badge_html}</td>
+                <td>
+                    <div style="font-weight: 600; color: #FAFAF8;">{f.parameter_name}</div>
+                    <div style="font-size: 0.72rem; color: var(--muted); font-family: var(--ff-mono);">{f.unit or 'Criterio Cualitativo'}</div>
+                </td>
+                <td style="font-family: var(--ff-mono);">{f.measured_raw}</td>
+                <td style="font-family: var(--ff-mono);">{f.specification_summary}</td>
+                <td style="font-family: var(--ff-mono);">{dev_str}</td>
+                <td style="text-align: center;">{cqa_html}</td>
+                <td>{quote_html}</td>
+                <td style="font-size: 0.82rem; line-height: 1.4;">{f.rationale}</td>
+            </tr>
+            """
+        )
+
+    if not rows_html:
+        return '<div class="brand-card"><p style="color: var(--muted);">No hay parámetros que coincidan con el filtro seleccionado.</p></div>'
+
+    table_html = f"""
+    <div class="booktabs-table-wrapper">
+        <table class="booktabs">
+            <thead>
+                <tr>
+                    <th>Estado</th>
+                    <th>Parámetro Analítico</th>
+                    <th>Valor Medido (CoA)</th>
+                    <th>Límite Monografía</th>
+                    <th>Desviación</th>
+                    <th style="text-align: center;">CQA</th>
+                    <th>Trazabilidad</th>
+                    <th>Justificación Técnica Farmacopeica</th>
+                </tr>
+            </thead>
+            <tbody>
+                {''.join(rows_html)}
+            </tbody>
+        </table>
+    </div>
+    """
+    return table_html
+
 
 # Header Formal Block with Authentic AquaBiotics Sur Identity
 logo_b64 = get_brand_logo_b64()
@@ -809,32 +1004,8 @@ with tab1:
         ["Todos los Ensayos", "Fallas Críticas y Alertas Solamente", "Ensayos Conformes Solamente"],
     )
 
-    findings_data: list[dict[str, Any]] = []
-    for f in report.findings:
-        if filter_status == "Fallas Críticas y Alertas Solamente" and f.status == FindingStatus.PASS:
-            continue
-        if filter_status == "Ensayos Conformes Solamente" and f.status != FindingStatus.PASS:
-            continue
-
-        dev_str = f"+{f.deviation_percent}%" if f.deviation_percent and f.deviation_percent > 0 else (
-            f"{f.deviation_percent}%" if f.deviation_percent else "0.0%"
-        )
-        findings_data.append({
-            "Estado": f.status.value,
-            "Parámetro": f.parameter_name,
-            "Valor Medido": f"{f.measured_raw}",
-            "Límite Monografía": f.specification_summary,
-            "Desviación": dev_str,
-            "Atributo Crítico (CQA)": "Sí" if f.is_critical else "No",
-            "Cita Verificada": "Verificado" if f.quote_verified else "No Verificado",
-            "Justificación Técnica": f.rationale,
-        })
-
-    if findings_data:
-        df_findings = pd.DataFrame(findings_data)
-        st.dataframe(df_findings, width="stretch", hide_index=True)
-    else:
-        st.info("No hay parámetros que coincidan con el filtro seleccionado.")
+    # Render High-Fidelity Booktabs Compliance Table
+    st.markdown(render_regutech_booktabs_table(report.findings, filter_status), unsafe_allow_html=True)
 
 with tab2:
     st.markdown('<div class="brand-section-header">Trazabilidad de Evidencia Textual Cero-Alucinación</div>', unsafe_allow_html=True)
@@ -864,11 +1035,26 @@ with tab2:
         )
         selected_finding = next(f for f in report.findings if f.parameter_name == selected_param)
 
-        st.markdown(f"**Parámetro:** `{selected_finding.parameter_name}`")
-        st.markdown(f"**Estado:** `{selected_finding.status.value}`")
-        st.markdown(f"**Valor Reportado:** `{selected_finding.measured_raw}`")
-        st.markdown(f"**Límite de Monografía:** `{selected_finding.specification_summary}`")
-        st.markdown("**Cita Literal de Evidencia Extraída:**")
+        st.markdown(
+            f"""
+            <div class="brand-card" style="border-left: 3px solid var(--teal); margin-bottom: 0.8rem;">
+                <div style="font-family: var(--ff-mono); font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--teal); margin-bottom: 0.3rem;">
+                    FICHA ANALÍTICA DE INSPECCIÓN
+                </div>
+                <div style="font-size: 1.15rem; font-weight: 600; color: #FAFAF8; font-family: var(--ff-display); margin-bottom: 0.5rem;">
+                    {selected_finding.parameter_name}
+                </div>
+                <div style="font-size: 0.82rem; color: var(--muted-strong); line-height: 1.5;">
+                    <strong>Unidad / Escala:</strong> {selected_finding.unit or 'Cualitativa'}<br>
+                    <strong>Valor Extraído:</strong> <span style="font-family: var(--ff-mono); color: #3ABFB2;">{selected_finding.measured_raw}</span><br>
+                    <strong>Especificación:</strong> <span style="font-family: var(--ff-mono);">{selected_finding.specification_summary}</span>
+                </div>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+
+        st.markdown("**Cita Literal Extraída:**")
         st.code(selected_finding.evidence_quote, language="text")
 
         if selected_finding.quote_verified:
@@ -881,10 +1067,24 @@ with tab2:
         raw_text = dossier.full_text
         quote = selected_finding.evidence_quote
         if quote and quote in raw_text:
-            highlighted = raw_text.replace(quote, f"[EVIDENCIA LITERAL VERIFICADA: {quote}]")
-            st.text_area("Contenido Ingerido (con cita resaltada):", highlighted, height=350)
+            highlighted = raw_text.replace(quote, f"=== [EVIDENCIA VERIFICADA] ===\n{quote}\n===============================")
+            st.markdown(
+                f"""
+                <div class="code-container" style="max-height: 400px;">
+                    <code>{highlighted}</code>
+                </div>
+                """,
+                unsafe_allow_html=True,
+            )
         else:
-            st.text_area("Contenido Ingerido:", raw_text, height=350)
+            st.markdown(
+                f"""
+                <div class="code-container" style="max-height: 400px;">
+                    <code>{raw_text}</code>
+                </div>
+                """,
+                unsafe_allow_html=True,
+            )
 
 with tab3:
     st.markdown('<div class="brand-section-header">Exportación de Dossier de Calidad y Cumplimiento</div>', unsafe_allow_html=True)
@@ -904,41 +1104,63 @@ with tab3:
         unsafe_allow_html=True,
     )
 
-    json_dossier = report.model_dump_json(indent=2)
-    st.download_button(
-        label="Descargar Dossier Formal de Auditoría (JSON / LIMS)",
-        data=json_dossier,
-        file_name=f"audit_{report.batch_id}.json",
-        mime="application/json",
-        width="stretch",
-    )
+    col_lims, col_md = st.columns(2)
+    with col_lims:
+        st.markdown("#### Dossier Digital LIMS (JSON Pydantic v2)")
+        st.caption("Contrato estructurado e inmutable para integración mediante API.")
+        json_dossier = report.model_dump_json(indent=2)
+        st.markdown(
+            f"""
+            <div class="code-container">
+                <code>{json_dossier}</code>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+        st.download_button(
+            label="Descargar Dossier Formal de Auditoría (JSON)",
+            data=json_dossier,
+            file_name=f"audit_{report.batch_id}.json",
+            mime="application/json",
+            width="stretch",
+        )
 
-    md_summary = (
-        f"# Certificate of Analysis Audit Release Summary\n\n"
-        f"**Batch ID:** {report.batch_id}\n\n"
-        f"**Product:** {report.product_name}\n\n"
-        f"**Regulatory Specification:** {report.specification_name}\n\n"
-        f"**Disposition Verdict:** {report.verdict.value}\n\n"
-        f"**Compliance Score:** {report.compliance_score}%\n\n"
-        f"**Auditor Signature:** Automated Closed-Loop ReguTech Invariant Auditor\n\n"
-        f"**Timestamp (UTC):** {report.auditor_timestamp}\n\n"
-        f"## Summary of Findings:\n"
-        f"- Total Parameters Tested: {report.total_tests}\n"
-        f"- Parameters Passing: {report.passed_count}\n"
-        f"- Preventative Warnings: {report.warning_count}\n"
-        f"- Critical Specification Failures: {report.failed_count}\n"
-        f"- Unverified Evidence Quotes: {report.unverified_count}\n\n"
-        f"---\n"
-        f"*Generated by ReguTech-AI Auditor • AquaBiotics Sur Quality Assurance & Regulatory Affairs*\n"
-    )
-    st.text_area("Vista Previa del Resumen Técnico (Markdown):", md_summary, height=200)
-    st.download_button(
-        label="Descargar Resumen de Liberación (Markdown)",
-        data=md_summary,
-        file_name=f"release_summary_{report.batch_id}.md",
-        mime="text/markdown",
-        width="stretch",
-    )
+    with col_md:
+        st.markdown("#### Acta Formal de Liberación (Markdown)")
+        st.caption("Resumen técnico ejecutable para archivo físico o firma electrónica.")
+        md_summary = (
+            f"# Certificate of Analysis Audit Release Summary\n\n"
+            f"**Batch ID:** {report.batch_id}\n\n"
+            f"**Product:** {report.product_name}\n\n"
+            f"**Regulatory Specification:** {report.specification_name}\n\n"
+            f"**Disposition Verdict:** {report.verdict.value}\n\n"
+            f"**Compliance Score:** {report.compliance_score}%\n\n"
+            f"**Auditor Signature:** Automated Closed-Loop ReguTech Invariant Auditor\n\n"
+            f"**Timestamp (UTC):** {report.auditor_timestamp}\n\n"
+            f"## Summary of Findings:\n"
+            f"- Total Parameters Tested: {report.total_tests}\n"
+            f"- Parameters Passing: {report.passed_count}\n"
+            f"- Preventative Warnings: {report.warning_count}\n"
+            f"- Critical Specification Failures: {report.failed_count}\n"
+            f"- Unverified Evidence Quotes: {report.unverified_count}\n\n"
+            f"---\n"
+            f"*Generated by ReguTech-AI Auditor • AquaBiotics Sur Quality Assurance & Regulatory Affairs*\n"
+        )
+        st.markdown(
+            f"""
+            <div class="code-container">
+                <code>{md_summary}</code>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+        st.download_button(
+            label="Descargar Resumen de Liberación (Markdown)",
+            data=md_summary,
+            file_name=f"release_summary_{report.batch_id}.md",
+            mime="text/markdown",
+            width="stretch",
+        )
 
 with tab4:
     st.markdown('<div class="brand-section-header">Fundamentos GMP, Validación FDA & Arquitectura Cero-Alucinación</div>', unsafe_allow_html=True)
