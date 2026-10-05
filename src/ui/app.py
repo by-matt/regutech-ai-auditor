@@ -415,7 +415,7 @@ else:
 
 # Run Audit
 auditor = DeterministicAuditor(strict_verification=strict_invariant)
-report = auditor.audit(
+report = auditor.audit_batch(
     batch_id=batch_code,
     product_name=product_name,
     specification_name=spec_title,

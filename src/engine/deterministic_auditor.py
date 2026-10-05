@@ -289,3 +289,22 @@ class DeterministicAuditor:
             findings=findings,
             summary_notes=notes,
         )
+
+    def audit(
+        self,
+        batch_id: str,
+        product_name: str,
+        specification_name: str,
+        measurements: list[ParameterMeasurement],
+        rules: list[SpecificationRule],
+        dossier: DocumentContent | None = None,
+    ) -> AuditReport:
+        """Alias for audit_batch."""
+        return self.audit_batch(
+            batch_id=batch_id,
+            product_name=product_name,
+            specification_name=specification_name,
+            measurements=measurements,
+            rules=rules,
+            dossier=dossier,
+        )

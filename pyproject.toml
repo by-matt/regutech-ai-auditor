@@ -64,7 +64,7 @@ disallow_untyped_defs = false
 check_untyped_defs = true
 
 [[tool.mypy.overrides]]
-module = ["streamlit.*", "pypdf.*", "pdfplumber.*", "pandas.*"]
+module = ["streamlit.*", "pypdf.*", "pandas.*"]
 ignore_missing_imports = true
 
 [tool.pytest.ini_options]

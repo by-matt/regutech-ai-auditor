@@ -92,3 +92,10 @@ class DocumentLoader:
             pages=[page],
             full_text=raw_text,
         )
+
+    @classmethod
+    def load_bytes(cls, file_bytes: bytes, filename: str = "document.pdf") -> DocumentContent:
+        """Parse in-memory bytes (PDF or plaintext) into DocumentContent."""
+        if filename.lower().endswith(".txt"):
+            return cls.load_text(file_bytes.decode("utf-8", errors="replace"), filename)
+        return cls.load_pdf(file_bytes, filename)
