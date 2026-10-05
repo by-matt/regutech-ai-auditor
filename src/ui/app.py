@@ -1,7 +1,7 @@
 """Streamlit UI for ReguTech-AI Auditor - Deterministic CoA and Pharmacopeia Audit.
 
 Operational Scope: Zero-hallucination deterministic compliance auditing for pharma & biotech.
-Design Standard: AquaBiotics Sur Corporate Brand Identity & Executive Editorial System.
+Design Standard: AquaBiotics Sur Corporate Brand Identity · Executive Editorial & Luxury Dark System.
 """
 
 import base64
@@ -44,7 +44,7 @@ def get_brand_logo_b64() -> str:
     return ""
 
 
-# AquaBiotics Sur Official Corporate Design System (Anti-AI Human Craft)
+# AquaBiotics Sur High-End Luxury Dark Design System
 st.markdown(
     """
     <style>
@@ -57,29 +57,37 @@ st.markdown(
         --teal: #3ABFB2;
         --teal-light: #7ADBD3;
         --teal-dark: #1E8C82;
-        --navy: #0A1628;
-        --navy-mid: #142236;
-        --navy-light: #1E3350;
+        --navy: #070e17;
+        --navy-surface: #0e1c2e;
+        --navy-elevated: #14273f;
         --lavender: #7B7DC0;
         --lavender-light: #A9AADC;
         --steel: #6B8FAB;
         --cream: #F7F3ED;
         --warm-white: #FAFAF8;
-        --charcoal: #1E1E2A;
         --muted: rgba(247, 243, 237, 0.55);
-        --muted-strong: rgba(247, 243, 237, 0.85);
+        --muted-strong: rgba(247, 243, 237, 0.88);
         --ff-display: 'Cormorant Garamond', Georgia, serif;
         --ff-body: 'Raleway', -apple-system, BlinkMacSystemFont, sans-serif;
         --ff-mono: 'Space Mono', 'Consolas', monospace;
     }
 
-    /* Core Application Surface */
+    /* Seamless Viewport & Ambient Gradient Mesh */
+    #MainMenu, footer { visibility: hidden !important; }
+    header[data-testid="stHeader"] { background: transparent !important; }
+
     .stApp {
         background-color: var(--navy);
+        background-image:
+            radial-gradient(circle at 10% 12%, rgba(58, 191, 178, 0.08) 0%, transparent 45%),
+            radial-gradient(circle at 90% 88%, rgba(217, 113, 90, 0.06) 0%, transparent 50%),
+            radial-gradient(circle at 50% 50%, rgba(123, 125, 192, 0.03) 0%, transparent 55%);
+        background-attachment: fixed;
         color: var(--cream);
         font-family: var(--ff-body);
         font-weight: 300;
         line-height: 1.65;
+        letter-spacing: 0.01em;
     }
 
     /* Executive Typography Overrides */
@@ -90,10 +98,11 @@ st.markdown(
         letter-spacing: -0.01em;
     }
 
-    /* Sidebar Styling */
+    /* Sidebar Luxury Styling */
     section[data-testid="stSidebar"] {
-        background-color: #0c182c !important;
+        background: linear-gradient(180deg, #07101c 0%, #050a12 100%) !important;
         border-right: 1px solid rgba(58, 191, 178, 0.18) !important;
+        box-shadow: 4px 0 24px rgba(0, 0, 0, 0.5) !important;
     }
     section[data-testid="stSidebar"] h1,
     section[data-testid="stSidebar"] h2,
@@ -104,19 +113,38 @@ st.markdown(
         font-weight: 600 !important;
     }
     section[data-testid="stSidebar"] .stMarkdown p {
-        font-size: 0.88rem;
+        font-size: 0.85rem;
         color: var(--muted-strong);
     }
 
-    /* Brand Header Block */
+    /* Pulse Dot for System Operational Status */
+    @keyframes livePulse {
+        0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(58, 191, 178, 0.7); }
+        70% { transform: scale(1.05); box-shadow: 0 0 0 7px rgba(58, 191, 178, 0); }
+        100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(58, 191, 178, 0); }
+    }
+    .pulse-dot {
+        display: inline-block;
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: var(--teal);
+        animation: livePulse 2.2s infinite;
+        margin-right: 6px;
+        vertical-align: middle;
+    }
+
+    /* Brand Header Luxury Banner */
     .brand-header-card {
         position: relative;
-        background: linear-gradient(145deg, #0A1628 0%, #142236 100%);
+        background: linear-gradient(145deg, rgba(14, 28, 46, 0.85) 0%, rgba(8, 16, 28, 0.95) 100%);
         border: 1px solid rgba(58, 191, 178, 0.22);
+        border-top: 1px solid rgba(122, 219, 211, 0.38);
         border-radius: 8px;
-        padding: 1.75rem 2rem;
-        margin-bottom: 1.5rem;
-        box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.6);
+        padding: 1.85rem 2.2rem;
+        margin-bottom: 1.6rem;
+        box-shadow: 0 12px 36px -10px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(14px);
         overflow: hidden;
     }
     .brand-top-accent {
@@ -125,32 +153,32 @@ st.markdown(
         left: 0;
         right: 0;
         height: 3.5px;
-        background: linear-gradient(90deg, #0A1628 0%, #3ABFB2 45%, #D9715A 100%);
+        background: linear-gradient(90deg, #070e17 0%, #3ABFB2 45%, #D9715A 100%);
     }
     .brand-header-flex {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        gap: 1.75rem;
+        gap: 2rem;
     }
     .brand-header-text {
         flex: 1;
     }
     .brand-logo-img {
-        width: 100px;
-        height: 100px;
+        width: 105px;
+        height: 105px;
         object-fit: contain;
-        filter: drop-shadow(0 4px 14px rgba(58, 191, 178, 0.25));
+        filter: drop-shadow(0 6px 18px rgba(58, 191, 178, 0.3));
     }
     .brand-label-row {
         display: flex;
         align-items: center;
         gap: 12px;
-        margin-bottom: 0.5rem;
+        margin-bottom: 0.55rem;
     }
     .brand-pill {
         font-family: var(--ff-mono);
-        font-size: 0.72rem;
+        font-size: 0.7rem;
         letter-spacing: 0.16em;
         text-transform: uppercase;
         color: var(--teal);
@@ -158,183 +186,139 @@ st.markdown(
         display: inline-flex;
         align-items: center;
         gap: 7px;
-    }
-    .brand-pill::before {
-        content: "";
-        display: inline-block;
-        width: 7px;
-        height: 7px;
-        background: var(--coral);
-        border-radius: 50%;
+        background: rgba(58, 191, 178, 0.08);
+        padding: 3px 10px;
+        border-radius: 3px;
+        border: 1px solid rgba(58, 191, 178, 0.2);
     }
     .brand-doc-code {
         font-family: var(--ff-mono);
-        font-size: 0.72rem;
+        font-size: 0.7rem;
         color: var(--muted);
         letter-spacing: 0.12em;
-        border-left: 1px solid rgba(247, 243, 237, 0.2);
-        padding-left: 10px;
+        padding-left: 6px;
     }
     .brand-hero-title {
         font-family: var(--ff-display);
-        font-size: 2.35rem;
+        font-size: 2.5rem;
         font-weight: 600;
         line-height: 1.1;
         color: var(--cream);
-        margin: 0 0 0.4rem 0;
+        margin: 0 0 0.45rem 0;
+        text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
     }
     .brand-hero-subtitle {
         font-family: var(--ff-body);
         font-size: 0.95rem;
         font-weight: 300;
         color: var(--muted-strong);
-        line-height: 1.5;
-        margin: 0 0 1rem 0;
+        line-height: 1.55;
+        margin: 0 0 1.1rem 0;
+        max-width: 900px;
     }
     .brand-meta-grid {
         display: flex;
         flex-wrap: wrap;
-        gap: 1.75rem;
-        border-top: 1px solid rgba(247, 243, 237, 0.1);
-        padding-top: 0.85rem;
-        font-size: 0.82rem;
+        gap: 2rem;
+        border-top: 1px solid rgba(58, 191, 178, 0.15);
+        padding-top: 0.95rem;
+        font-size: 0.8rem;
         color: var(--muted);
-        font-family: var(--ff-body);
+        font-family: var(--ff-mono);
+        letter-spacing: 0.03em;
     }
     .brand-meta-item strong {
         color: var(--teal);
-        font-weight: 600;
-    }
-
-    /* Editorial Cards */
-    .brand-card {
-        background: var(--navy-mid);
-        border: 1px solid rgba(247, 243, 237, 0.08);
-        border-radius: 6px;
-        padding: 1.25rem 1.5rem;
-        margin-bottom: 1.15rem;
-    }
-    .brand-card.teal-accent {
-        border-left: 3.5px solid var(--teal);
-    }
-    .brand-card.coral-accent {
-        border-left: 3.5px solid var(--coral);
-    }
-    .brand-card.lavender-accent {
-        border-left: 3.5px solid var(--lavender);
-    }
-
-    /* Onboarding Guide Box */
-    .brand-guide-title {
-        font-family: var(--ff-mono);
-        font-size: 0.8rem;
-        letter-spacing: 0.14em;
-        text-transform: uppercase;
-        color: var(--teal);
         font-weight: 700;
-        margin-bottom: 0.5rem;
-    }
-    .brand-guide-text {
-        font-size: 0.9rem;
-        color: var(--muted-strong);
-        line-height: 1.6;
-        margin: 0;
-    }
-    .brand-guide-grid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 1.1rem;
-        margin-top: 1.15rem;
-    }
-    .brand-guide-col {
-        background: #0f1d30;
-        border: 1px solid rgba(58, 191, 178, 0.15);
-        border-radius: 4px;
-        padding: 1rem 1.15rem;
-        font-size: 0.85rem;
-        color: var(--muted-strong);
-        line-height: 1.5;
-    }
-    .brand-guide-col strong {
-        font-family: var(--ff-mono);
-        color: var(--coral-light);
-        display: block;
-        margin-bottom: 0.4rem;
-        font-size: 0.8rem;
-        letter-spacing: 0.05em;
-        text-transform: uppercase;
     }
 
-    /* KPI Metrics Cards */
+    /* Luxury Container Cards */
+    .brand-card {
+        background: linear-gradient(150deg, rgba(14, 28, 46, 0.75) 0%, rgba(8, 16, 28, 0.9) 100%);
+        border: 1px solid rgba(58, 191, 178, 0.16);
+        border-radius: 6px;
+        padding: 1.35rem 1.6rem;
+        margin-bottom: 1.25rem;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+        backdrop-filter: blur(10px);
+    }
+    .brand-card.teal-accent { border-left: 3.5px solid var(--teal); }
+    .brand-card.coral-accent { border-left: 3.5px solid var(--coral); }
+    .brand-card.lavender-accent { border-left: 3.5px solid var(--lavender); }
+
+    /* Luxury KPI Metric Cards */
     .brand-kpi-card {
-        background: var(--navy-mid);
-        border: 1px solid rgba(247, 243, 237, 0.08);
+        background: linear-gradient(160deg, rgba(16, 32, 52, 0.85) 0%, rgba(9, 18, 30, 0.95) 100%);
+        border: 1px solid rgba(58, 191, 178, 0.18);
         border-top: 3px solid var(--teal);
         border-radius: 6px;
-        padding: 1.1rem 1.2rem;
+        padding: 1.25rem 1.35rem;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
         height: 100%;
-        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+        box-shadow: 0 8px 26px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.04);
+        transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
     }
-    .brand-kpi-card.coral-top {
-        border-top-color: var(--coral);
+    .brand-kpi-card:hover {
+        transform: translateY(-2px);
+        border-color: rgba(58, 191, 178, 0.38);
+        box-shadow: 0 12px 34px rgba(0, 0, 0, 0.6), 0 0 18px rgba(58, 191, 178, 0.12);
     }
-    .brand-kpi-card.lavender-top {
-        border-top-color: var(--lavender);
-    }
-    .brand-kpi-card.steel-top {
-        border-top-color: var(--steel);
-    }
+    .brand-kpi-card.coral-top { border-top-color: var(--coral); }
+    .brand-kpi-card.lavender-top { border-top-color: var(--lavender); }
+    .brand-kpi-card.steel-top { border-top-color: var(--steel); }
+
     .brand-kpi-label {
         font-family: var(--ff-mono);
         font-size: 0.68rem;
-        letter-spacing: 0.13em;
+        letter-spacing: 0.16em;
         text-transform: uppercase;
         color: var(--teal-light);
-        margin-bottom: 0.35rem;
+        margin-bottom: 0.45rem;
         font-weight: 700;
+        opacity: 0.95;
     }
     .brand-kpi-val {
         font-family: var(--ff-display);
-        font-size: 1.95rem;
+        font-size: 2.15rem;
         font-weight: 600;
-        color: var(--cream);
-        line-height: 1.1;
+        color: var(--warm-white);
+        line-height: 1.05;
+        letter-spacing: -0.01em;
     }
     .brand-kpi-badge {
         font-family: var(--ff-mono);
         font-size: 0.72rem;
-        letter-spacing: 0.05em;
-        margin-top: 0.45rem;
-        padding: 2px 7px;
+        letter-spacing: 0.06em;
+        margin-top: 0.65rem;
+        padding: 3px 9px;
         border-radius: 3px;
         width: fit-content;
     }
     .badge-teal {
         background: rgba(58, 191, 178, 0.12);
         color: var(--teal-light);
-        border: 1px solid rgba(58, 191, 178, 0.3);
+        border: 1px solid rgba(58, 191, 178, 0.32);
     }
     .badge-coral {
-        background: rgba(217, 113, 90, 0.12);
+        background: rgba(217, 113, 90, 0.14);
         color: var(--coral-light);
-        border: 1px solid rgba(217, 113, 90, 0.3);
+        border: 1px solid rgba(217, 113, 90, 0.35);
     }
     .badge-lavender {
-        background: rgba(123, 125, 192, 0.12);
+        background: rgba(123, 125, 192, 0.14);
         color: var(--lavender-light);
-        border: 1px solid rgba(123, 125, 192, 0.3);
+        border: 1px solid rgba(123, 125, 192, 0.35);
     }
 
     /* Insight Card */
     .brand-insight-box {
-        background: #0f1d30;
+        background: rgba(14, 28, 46, 0.65);
         border: 1px solid rgba(247, 243, 237, 0.08);
         border-left: 3.5px solid var(--coral);
         border-radius: 0 4px 4px 0;
-        padding: 0.95rem 1.25rem;
+        padding: 1rem 1.3rem;
         margin-bottom: 0.85rem;
     }
     .brand-insight-title {
@@ -347,110 +331,134 @@ st.markdown(
         margin-bottom: 0.25rem;
     }
     .brand-insight-text {
-        font-size: 0.84rem;
+        font-size: 0.85rem;
         color: var(--muted-strong);
-        line-height: 1.5;
+        line-height: 1.55;
         margin: 0;
     }
 
     /* Section Subheadings */
     .brand-section-header {
         font-family: var(--ff-display);
-        font-size: 1.45rem;
+        font-size: 1.5rem;
         font-weight: 600;
         color: var(--cream);
-        margin-top: 0.75rem;
+        margin-top: 0.85rem;
         margin-bottom: 0.35rem;
         display: flex;
         align-items: center;
-        gap: 0.5rem;
+        gap: 0.6rem;
     }
 
-    /* Tabs Styling (Eliminates Streamlit Red Accent) */
+    /* Luxury Segmented Tabs */
     .stTabs [data-baseweb="tab-list"] {
-        gap: 8px;
-        border-bottom: 1px solid rgba(58, 191, 178, 0.2) !important;
-        background: transparent !important;
+        gap: 6px;
+        border-bottom: 1px solid rgba(58, 191, 178, 0.22) !important;
+        background: rgba(7, 14, 24, 0.6) !important;
+        padding: 5px 6px 0 6px !important;
+        border-radius: 6px 6px 0 0 !important;
     }
     .stTabs [data-baseweb="tab"] {
         font-family: var(--ff-mono) !important;
-        font-size: 0.78rem !important;
-        letter-spacing: 0.08em !important;
+        font-size: 0.76rem !important;
+        letter-spacing: 0.1em !important;
         text-transform: uppercase !important;
         color: var(--muted) !important;
         padding: 10px 18px !important;
         border-radius: 4px 4px 0 0 !important;
         background: transparent !important;
-        border-bottom: 2px solid transparent !important;
+        border: 1px solid transparent !important;
+        border-bottom: 2.5px solid transparent !important;
+        transition: all 0.2s ease !important;
     }
     .stTabs [data-baseweb="tab"]:hover {
         color: var(--teal-light) !important;
+        background: rgba(58, 191, 178, 0.05) !important;
     }
     .stTabs [aria-selected="true"] {
         color: var(--teal) !important;
         border-bottom: 2.5px solid var(--teal) !important;
         font-weight: 700 !important;
-        background: rgba(58, 191, 178, 0.05) !important;
+        background: rgba(58, 191, 178, 0.1) !important;
+        border-top: 1px solid rgba(58, 191, 178, 0.25) !important;
+        border-left: 1px solid rgba(58, 191, 178, 0.25) !important;
+        border-right: 1px solid rgba(58, 191, 178, 0.25) !important;
     }
 
-    /* Primary Buttons & Interactive Controls */
+    /* Form Fields & Dark Inputs */
+    div[data-baseweb="select"] > div,
+    div[data-baseweb="input"] > div {
+        background-color: #0c1828 !important;
+        border: 1px solid rgba(58, 191, 178, 0.25) !important;
+        border-radius: 4px !important;
+        color: var(--cream) !important;
+    }
+    div[data-baseweb="select"] > div:hover,
+    div[data-baseweb="input"] > div:hover {
+        border-color: var(--teal) !important;
+    }
+
+    /* Primary Action Buttons */
     div.stButton > button[kind="primary"],
     div.stFormSubmitButton > button {
-        background: var(--teal-dark) !important;
-        color: var(--cream) !important;
-        border: 1px solid var(--teal) !important;
+        background: linear-gradient(135deg, #1E8C82 0%, #156d65 100%) !important;
+        color: var(--warm-white) !important;
+        border: 1px solid #3ABFB2 !important;
         font-family: var(--ff-body) !important;
         font-weight: 600 !important;
-        letter-spacing: 0.05em !important;
+        letter-spacing: 0.06em !important;
         border-radius: 4px !important;
-        padding: 0.55rem 1.35rem !important;
+        padding: 0.6rem 1.4rem !important;
+        box-shadow: 0 4px 14px rgba(30, 140, 130, 0.35) !important;
         transition: all 0.25s ease !important;
     }
     div.stButton > button[kind="primary"]:hover,
     div.stFormSubmitButton > button:hover {
         background: var(--teal) !important;
         color: var(--navy) !important;
-        box-shadow: 0 4px 16px rgba(58, 191, 178, 0.4) !important;
+        box-shadow: 0 6px 20px rgba(58, 191, 178, 0.45) !important;
+        transform: translateY(-1px) !important;
     }
 
     /* Formal Validation Seal */
     .brand-seal-box {
-        margin-top: 2.5rem;
-        padding: 1.35rem 1.65rem;
-        background: #0c182c;
+        margin-top: 2.8rem;
+        padding: 1.45rem 1.85rem;
+        background: linear-gradient(145deg, #091322 0%, #050a12 100%);
         border: 1px solid rgba(58, 191, 178, 0.25);
         border-radius: 6px;
         display: flex;
         justify-content: space-between;
         align-items: center;
         flex-wrap: wrap;
-        gap: 1.25rem;
+        gap: 1.35rem;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
     }
     .brand-seal-title {
         font-family: var(--ff-mono);
         font-size: 0.8rem;
-        letter-spacing: 0.14em;
+        letter-spacing: 0.16em;
         text-transform: uppercase;
         color: var(--teal);
         font-weight: 700;
-        margin-bottom: 0.25rem;
+        margin-bottom: 0.3rem;
     }
     .brand-seal-desc {
         font-size: 0.82rem;
         color: var(--muted);
-        line-height: 1.45;
+        line-height: 1.5;
     }
     .brand-seal-auth {
         text-align: right;
         font-family: var(--ff-mono);
         font-size: 0.78rem;
         color: var(--coral-light);
-        line-height: 1.4;
+        line-height: 1.45;
     }
     .brand-seal-auth strong {
         font-family: var(--ff-display);
-        font-size: 1.1rem;
-        color: var(--cream);
+        font-size: 1.15rem;
+        color: var(--warm-white);
         display: block;
     }
     </style>
@@ -477,22 +485,22 @@ st.markdown(
         <div class="brand-header-flex">
             <div class="brand-header-text">
                 <div class="brand-label-row">
-                    <span class="brand-pill">AquaBiotics Sur · Aseguramiento de Calidad &amp; I+D</span>
+                    <span class="brand-pill"><span class="pulse-dot"></span>SISTEMA AUDITOR ACTIVO · QA/RA</span>
                     <span class="brand-doc-code">DICTAMEN TÉCNICO-LEGAL · AB-SUR-REG-2026-v2.2</span>
                 </div>
                 <h1 class="brand-hero-title">
                     Aqua<span style="color: #3ABFB2;">Biotics</span> <span style="color: #D9715A; font-style: italic;">Sur</span>
-                    <span style="font-size: 0.65em; font-weight: 300; opacity: 0.85;">· ReguTech-AI Auditor</span>
+                    <span style="font-size: 0.62em; font-weight: 300; opacity: 0.85;">· ReguTech-AI Auditor</span>
                 </h1>
                 <p class="brand-hero-subtitle">
                     Motor Determinista de Liberación de Lotes y Verificación de Certificados de Análisis (CoA)
                     bajo Monografías Farmacopeicas (USP / Ph. Eur.). Arquitectura Cero-Alucinación mediante Invariante de Subcadena Exacta.
                 </p>
                 <div class="brand-meta-grid">
-                    <div class="brand-meta-item"><strong>Marco Regulatorio:</strong> 21 CFR Part 211 / GMP Anexo 16 (Qualified Person)</div>
-                    <div class="brand-meta-item"><strong>Seguridad Semántica:</strong> Exact-Quote Substring Invariant (Zero-Hallucination)</div>
-                    <div class="brand-meta-item"><strong>Contratos de Datos:</strong> Esquemas Inmutables Pydantic v2</div>
-                    <div class="brand-meta-item"><strong>Verificación Compendial:</strong> Monografías Oficiales USP / Ph. Eur.</div>
+                    <div class="brand-meta-item"><strong>MARCO REGULATORIO:</strong> 21 CFR Part 211 / GMP Anexo 16 (Qualified Person)</div>
+                    <div class="brand-meta-item"><strong>INVARIANTE SEMÁNTICO:</strong> Exact-Quote Substring Invariant (Zero-Hallucination)</div>
+                    <div class="brand-meta-item"><strong>CONTRATOS DE DATOS:</strong> Esquemas Inmutables Pydantic v2</div>
+                    <div class="brand-meta-item"><strong>COMPENDIOS:</strong> Monografías Oficiales USP / Ph. Eur.</div>
                 </div>
             </div>
             <div>
@@ -509,8 +517,10 @@ with st.expander("📌 ¿QUÉ ES ESTA PLATAFORMA Y CUÁL ES SU PROPÓSITO? (Guí
     st.markdown(
         """
         <div class="brand-card teal-accent" style="margin-bottom: 0;">
-            <div class="brand-guide-title">🎯 Propósito Estratégico & Problema Farmacéutico que Resuelve</div>
-            <p class="brand-guide-text">
+            <div style="font-family: var(--ff-mono); font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--teal); font-weight: 700; margin-bottom: 0.4rem;">
+                🎯 Propósito Estratégico & Problema Farmacéutico que Resuelve
+            </div>
+            <p style="font-size: 0.88rem; color: var(--muted-strong); line-height: 1.6; margin: 0;">
                 En la industria biofarmacéutica y de ingredientes activos (APIs), la liberación de un lote al mercado exige verificar
                 que cada parámetro del Certificado de Análisis (CoA) cumpla rigurosamente con los límites de la Farmacopea Oficial (USP / Ph. Eur.).
                 Los LLMs convencionales son peligrosos en este entorno porque sufren de <strong>alucinaciones numéricas</strong> e inventan citas textuales.<br><br>
@@ -519,17 +529,23 @@ with st.expander("📌 ¿QUÉ ES ESTA PLATAFORMA Y CUÁL ES SU PROPÓSITO? (Guí
                 y verificación matemática determinista de límites. El sistema actúa como un <strong>co-piloto infalible para el Qualified Person (QP)</strong>,
                 garantizando liberación de lotes en segundos con trazabilidad 100% auditable.
             </p>
-            <div class="brand-guide-grid">
-                <div class="brand-guide-col">
-                    <strong>1. Selección de Monografía</strong>
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 1.15rem;">
+                <div style="background: rgba(10, 20, 34, 0.7); border: 1px solid rgba(58, 191, 178, 0.16); border-radius: 4px; padding: 0.95rem 1.1rem; font-size: 0.83rem; color: var(--muted-strong); line-height: 1.45;">
+                    <strong style="font-family: var(--ff-mono); color: var(--coral-light); display: block; margin-bottom: 0.35rem; font-size: 0.76rem; letter-spacing: 0.05em; text-transform: uppercase;">
+                        1. Selección de Monografía
+                    </strong>
                     En el panel lateral izquierdo, selecciona el estándar farmacopeico oficial (ej. Insulina Humana Recombinante USP o Trehalosa Ph. Eur.).
                 </div>
-                <div class="brand-guide-col">
-                    <strong>2. Ingesta de Lote (CoA)</strong>
+                <div style="background: rgba(10, 20, 34, 0.7); border: 1px solid rgba(58, 191, 178, 0.16); border-radius: 4px; padding: 0.95rem 1.1rem; font-size: 0.83rem; color: var(--muted-strong); line-height: 1.45;">
+                    <strong style="font-family: var(--ff-mono); color: var(--teal-light); display: block; margin-bottom: 0.35rem; font-size: 0.76rem; letter-spacing: 0.05em; text-transform: uppercase;">
+                        2. Ingesta de Lote (CoA)
+                    </strong>
                     Selecciona un lote conforme de referencia, un lote con contaminación crítica, o prueba el modo adversarial con citas falsificadas.
                 </div>
-                <div class="brand-guide-col">
-                    <strong>3. Veredicto & Trazabilidad</strong>
+                <div style="background: rgba(10, 20, 34, 0.7); border: 1px solid rgba(58, 191, 178, 0.16); border-radius: 4px; padding: 0.95rem 1.1rem; font-size: 0.83rem; color: var(--muted-strong); line-height: 1.45;">
+                    <strong style="font-family: var(--ff-mono); color: var(--lavender-light); display: block; margin-bottom: 0.35rem; font-size: 0.76rem; letter-spacing: 0.05em; text-transform: uppercase;">
+                        3. Veredicto & Trazabilidad
+                    </strong>
                     Revisa la disposición formal del lote (APROBADO / RECHAZADO / OBSERVADO), inspecciona la cita literal resaltada en el texto original y descarga el dossier.
                 </div>
             </div>
@@ -617,7 +633,6 @@ elif input_source == "Benchmark: Batch INS-2026-FAIL04 (Critical Contamination)"
 
 elif input_source == "Adversarial: Injected Rogue Hallucination Quote":
     dossier = DocumentLoader.load_text(SAMPLE_COA_CONFORMING_TEXT, "CoA_INS-2026-X88.txt")
-    # Clone and inject a fake quote
     measurements = [
         ParameterMeasurement(
             name="Appearance",
@@ -677,7 +692,7 @@ with col1:
     st.markdown(
         f"""
         <div class="brand-kpi-card {verdict_top}">
-            <div class="brand-kpi-label">Disposición de Lote</div>
+            <div class="brand-kpi-label">DISPOSICIÓN DE LOTE</div>
             <div class="brand-kpi-val">{verdict_text}</div>
             <div class="brand-kpi-badge {verdict_badge}">{verdict_sub}</div>
         </div>
@@ -689,7 +704,7 @@ with col2:
     st.markdown(
         f"""
         <div class="brand-kpi-card">
-            <div class="brand-kpi-label">Índice de Cumplimiento</div>
+            <div class="brand-kpi-label">ÍNDICE DE CUMPLIMIENTO</div>
             <div class="brand-kpi-val">{report.compliance_score}%</div>
             <div class="brand-kpi-badge badge-teal">Ponderación CQA</div>
         </div>
@@ -701,7 +716,7 @@ with col3:
     st.markdown(
         f"""
         <div class="brand-kpi-card steel-top">
-            <div class="brand-kpi-label">Ensayos Evaluados</div>
+            <div class="brand-kpi-label">ENSAYOS EVALUADOS</div>
             <div class="brand-kpi-val">{report.total_tests}</div>
             <div class="brand-kpi-badge badge-teal">Total Compendio</div>
         </div>
@@ -713,7 +728,7 @@ with col4:
     st.markdown(
         f"""
         <div class="brand-kpi-card">
-            <div class="brand-kpi-label">Ensayos Conformes</div>
+            <div class="brand-kpi-label">ENSAYOS CONFORMES</div>
             <div class="brand-kpi-val">{report.passed_count}</div>
             <div class="brand-kpi-badge badge-teal">{report.passed_count}/{report.total_tests} Conformes</div>
         </div>
@@ -727,7 +742,7 @@ with col5:
     st.markdown(
         f"""
         <div class="brand-kpi-card {unver_top}">
-            <div class="brand-kpi-label">Alertas / No Verif.</div>
+            <div class="brand-kpi-label">ALERTAS / NO VERIF.</div>
             <div class="brand-kpi-val">{report.warning_count} / {report.unverified_count}</div>
             <div class="brand-kpi-badge {unver_badge}">Alerta Temprana</div>
         </div>
