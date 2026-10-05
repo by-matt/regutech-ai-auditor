@@ -50,7 +50,7 @@ st.markdown(
         border: 1px solid #334155;
         border-radius: 10px;
         padding: 1.5rem 1.75rem;
-        margin-bottom: 1.5rem;
+        margin-bottom: 1.25rem;
         box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.4);
     }
     .exec-doc-badge {
@@ -93,6 +93,70 @@ st.markdown(
     .exec-meta-item strong {
         color: #e2e8f0;
         font-weight: 600;
+    }
+
+    /* Guide / Onboarding Box */
+    .exec-guide-box {
+        background: #0f172a;
+        border: 1px solid #1e293b;
+        border-left: 4px solid #0284c7;
+        border-radius: 8px;
+        padding: 1.25rem 1.5rem;
+        margin-bottom: 1.25rem;
+    }
+    .exec-guide-title {
+        font-size: 0.92rem;
+        font-weight: 700;
+        color: #38bdf8;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        margin-bottom: 0.5rem;
+    }
+    .exec-guide-text {
+        font-size: 0.88rem;
+        color: #cbd5e1;
+        line-height: 1.6;
+        margin: 0;
+    }
+    .exec-guide-step-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1rem;
+        margin-top: 1rem;
+    }
+    .exec-guide-step {
+        background: #1e293b;
+        border: 1px solid #334155;
+        border-radius: 6px;
+        padding: 0.85rem 1rem;
+        font-size: 0.83rem;
+        color: #94a3b8;
+        line-height: 1.45;
+    }
+    .exec-guide-step strong {
+        color: #38bdf8;
+        display: block;
+        margin-bottom: 0.3rem;
+        font-size: 0.86rem;
+    }
+
+    /* Explainer Cards */
+    .exec-card-explainer {
+        background: #0f172a;
+        border: 1px solid #1e293b;
+        border-radius: 6px;
+        padding: 0.9rem 1.15rem;
+        margin-bottom: 0.85rem;
+    }
+    .exec-card-explainer strong {
+        color: #38bdf8;
+        font-size: 0.86rem;
+    }
+    .exec-card-explainer p {
+        color: #94a3b8;
+        font-size: 0.82rem;
+        margin: 0.3rem 0 0 0;
+        line-height: 1.45;
     }
 
     /* Executive KPI Metric Cards */
@@ -225,6 +289,40 @@ st.markdown(
     """,
     unsafe_allow_html=True,
 )
+
+# Onboarding & Purpose Guide for First-Time Visitors
+with st.expander("📌 ¿QUÉ ES ESTA PLATAFORMA Y CUÁL ES SU PROPÓSITO? (Guía de Auditoría para Primeros Visitantes)", expanded=True):
+    st.markdown(
+        """
+        <div class="exec-guide-box">
+            <div class="exec-guide-title">🎯 Propósito Estratégico & Problema Farmacéutico que Resuelve</div>
+            <p class="exec-guide-text">
+                En la industria biofarmacéutica y de ingredientes activos (APIs), la liberación de un lote al mercado exige verificar
+                que cada parámetro del Certificado de Análisis (CoA) cumpla rigurosamente con los límites de la Farmacopea Oficial (USP / Ph. Eur.).
+                Los LLMs convencionales son peligrosos en este entorno porque sufren de <strong>alucinaciones numéricas</strong> e inventan citas textuales.<br><br>
+                <strong>ReguTech-AI Auditor</strong> resuelve esto mediante una arquitectura determinista de circuito cerrado:
+                aplica el <strong>Invariante de Subcadena Exacta</strong> (comprobación criptográfica/literal de que cada cita existe en el documento fuente)
+                y verificación matemática determinista de límites. El sistema actúa como un <strong>co-piloto infalible para el Qualified Person (QP)</strong>,
+                garantizando liberación de lotes en segundos con trazabilidad 100% auditable.
+            </p>
+            <div class="exec-guide-step-grid">
+                <div class="exec-guide-step">
+                    <strong>1. Selección de Monografía</strong>
+                    En el panel lateral izquierdo, selecciona el estándar farmacopeico oficial (ej. Insulina Humana Recombinante USP o Trehalosa Ph. Eur.).
+                </div>
+                <div class="exec-guide-step">
+                    <strong>2. Ingesta de Lote (CoA)</strong>
+                    Selecciona un lote conforme de referencia, un lote con contaminación crítica, o prueba el modo adversarial con citas falsificadas.
+                </div>
+                <div class="exec-guide-step">
+                    <strong>3. Veredicto & Trazabilidad</strong>
+                    Revisa la disposición formal del lote (APROBADO / RECHAZADO / OBSERVADO), inspecciona la cita literal resaltada en el texto original y descarga el dossier.
+                </div>
+            </div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
 
 # Sidebar controls
 st.sidebar.markdown("### ⚙️ Configuración de Auditoría")
@@ -403,7 +501,48 @@ with col5:
         unsafe_allow_html=True,
     )
 
-st.markdown("<div style='height: 1rem;'></div>", unsafe_allow_html=True)
+st.markdown("<div style='height: 0.6rem;'></div>", unsafe_allow_html=True)
+
+# Explanatory breakdown of KPIs
+with st.expander("💡 ¿CÓMO INTERPRETAR ESTOS 5 RESULTADOS REGULATORIOS?", expanded=False):
+    st.markdown(
+        """
+        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin-top: 0.25rem;">
+            <div class="exec-card-explainer">
+                <strong style="color: #10b981;">📋 Disposición de Lote (Batch Verdict):</strong>
+                <p>
+                    Dictamen formal de calidad conforme a GMP Anexo 16. <strong>APROBADO</strong> autoriza la salida a distribución comercial.
+                    <strong>RECHAZADO</strong> exige cuarentena inmediata por incumplimiento de Atributos Críticos de Calidad (CQA).
+                    <strong>OBSERVADO</strong> alerta desvíos preventivos que requieren firma del Qualified Person (QP).
+                </p>
+            </div>
+            <div class="exec-card-explainer">
+                <strong style="color: #38bdf8;">📊 Índice de Cumplimiento (%):</strong>
+                <p>
+                    Puntuación normalizada de adhesión al compendio oficial, ponderando con mayor peso los ensayos críticos (endotoxinas, bioburden, impurezas relacionadas)
+                    respecto a características organolépticas generales.
+                </p>
+            </div>
+            <div class="exec-card-explainer">
+                <strong style="color: #fbbf24;">⚠️ Alertas Preventivas (Early-Warning &ge; 85%):</strong>
+                <p>
+                    Mide parámetros que, aunque todavía están dentro del límite legal, alcanzaron más del 85% del valor máximo admisible.
+                    Esto previene fallas futuras identificando tendencias de deriva en el proceso de fermentación o purificación.
+                </p>
+            </div>
+            <div class="exec-card-explainer">
+                <strong style="color: #ef4444;">🛡️ No Verificados (Violación de Invariante):</strong>
+                <p>
+                    Si un modelo de IA intentara extraer una lectura inventada o alucinada que no existe textualmente en el certificado original,
+                    el sistema la marca inmediatamente como 'No Verificado' y bloquea la liberación automática del lote.
+                </p>
+            </div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+st.markdown("<div style='height: 0.5rem;'></div>", unsafe_allow_html=True)
 
 if report.verdict == OverallVerdict.APPROVED:
     st.success(f"✅ **LIBERACIÓN DE LOTE AUTORIZADA:** El lote `{report.batch_id}` cumple estrictamente con todas las especificaciones de la monografía.")
@@ -420,6 +559,20 @@ tab1, tab2, tab3 = st.tabs([
 ])
 
 with tab1:
+    st.markdown(
+        """
+        <div class="exec-card-explainer" style="margin-bottom: 1.25rem;">
+            <strong>📖 ¿Cómo leer esta Matriz de Auditoría?</strong>
+            <p>
+                Cada fila representa un ensayo analítico oficial. La columna <strong>Desviación</strong> calcula en tiempo real el porcentaje
+                de margen restante frente al límite superior farmacopeico. Los parámetros marcados como <strong>Atributo Crítico (CQA)</strong>
+                tienen impacto directo en la seguridad del paciente y son de rechazo inexcusable en caso de falla.
+            </p>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
     filter_status = st.selectbox(
         "Filtrar Resultados",
         ["Todos los Ensayos", "Fallas Críticas y Alertas Solamente", "Ensayos Conformes Solamente"],
@@ -455,9 +608,18 @@ with tab1:
 with tab2:
     st.markdown("### 🔍 Trazabilidad de Evidencia Textual Cero-Alucinación")
     st.markdown(
-        "Cada métrica extraída es contrastada matemáticamente contra el texto crudo del documento fuente. "
-        "El **Invariante de Subcadena Exacta** asegura que ninguna lectura sintética generada por modelos probabilísticos "
-        "pueda comprometer la disposición formal del lote farmacéutico."
+        """
+        <div class="exec-card-explainer" style="margin-bottom: 1.25rem;">
+            <strong>📖 ¿Qué significa esta Vista de Doble Pantalla?</strong>
+            <p>
+                A la izquierda, seleccionas cualquier parámetro analizado. A la derecha, el visor localiza y
+                <strong>resalta exactamente la cita textual literal</strong> encontrada dentro del documento original ingerido.<br>
+                Si alguien intenta falsificar o adulterar una lectura, el <strong>Invariante de Subcadena</strong> detecta que el texto
+                no coincide carácter por carácter y marca la cita con alerta roja de seguridad.
+            </p>
+        </div>
+        """,
+        unsafe_allow_html=True,
     )
 
     col_left, col_right = st.columns([1, 1])
@@ -493,7 +655,19 @@ with tab2:
 
 with tab3:
     st.markdown("### 📄 Exportación de Dossier de Calidad y Cumplimiento")
-    st.markdown("Descarga de contratos de datos serializables para integración LIMS/ERP y firma por Qualified Person (QP).")
+    st.markdown(
+        """
+        <div class="exec-card-explainer" style="margin-bottom: 1.25rem;">
+            <strong>📖 Propósito de Integración con Sistemas Regulados (21 CFR Part 11):</strong>
+            <p>
+                Permite exportar el dictamen formal en formatos auditables para archivado permanente en el dossier de liberación de la planta:<br>
+                • <strong>JSON (LIMS):</strong> Contrato de datos Pydantic v2 inmutable para registro en base de datos regulatoria.<br>
+                • <strong>Markdown (Release Summary):</strong> Acta técnica imprimible para firma manuscrita o electrónica del Director Técnico / Qualified Person.
+            </p>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
 
     json_dossier = report.model_dump_json(indent=2)
     st.download_button(
