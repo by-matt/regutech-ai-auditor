@@ -414,7 +414,7 @@ else:
         st.stop()
 
 # Run Audit
-auditor = DeterministicAuditor(strict_invariant=strict_invariant)
+auditor = DeterministicAuditor(strict_verification=strict_invariant)
 report = auditor.audit(
     batch_id=batch_code,
     product_name=product_name,

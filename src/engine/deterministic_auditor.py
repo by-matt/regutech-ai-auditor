@@ -18,7 +18,13 @@ from src.schemas.audit_models import (
 class DeterministicAuditor:
     """Executes closed-loop regulatory verification with mathematical bound guarantees."""
 
-    def __init__(self, strict_verification: bool = True):
+    def __init__(
+        self,
+        strict_verification: bool = True,
+        strict_invariant: bool | None = None,
+    ):
+        if strict_invariant is not None:
+            strict_verification = strict_invariant
         self.strict_verification = strict_verification
 
     @staticmethod
